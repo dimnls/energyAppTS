@@ -5,7 +5,8 @@ import {IntroPage} from './pages/intro/intro';
 import {DataService} from './providers/data/data';
 
 @App({
-  template: '<ion-nav [root]="rootPage"></ion-nav>',
+  // template: '<ion-nav [root]="rootPage"></ion-nav>',
+  templateUrl: 'build/app.html', //FOR MENU
   providers: [DataService],
   config: { tabbarPlacement: 'bottom' } // http://ionicframework.com/docs/v2/api/config/Config/
 })
@@ -17,7 +18,7 @@ export class MyApp {
   constructor(platform: Platform) {
     this.local = new Storage(LocalStorage);
     this.local.get('introShown').then((result: any) => {
-      if(!result) {
+      if(result) {
         this.rootPage = TabsPage;
       } else {
         this.local.set('introShown', 'true');
