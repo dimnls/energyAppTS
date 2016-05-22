@@ -36,7 +36,9 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": [],
+  "cordovaPlatforms": [
+    "android"
+  ],
   "name": "energyappts",
   "description": "energyAppTS: An Ionic project"
 }

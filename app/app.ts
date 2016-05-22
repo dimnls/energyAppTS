@@ -26,7 +26,8 @@ export class MyApp {
   constructor(private platform: Platform, private menu: MenuController) {
     this.initializeApp();
     this.menuPages = [
-      {title: 'User Info', component: UserInfoPage}
+      {title: 'Edit user info', component: UserInfoPage},
+      {title: 'Watch intro', component: IntroPage}
     ];
 
     this.goToIntroOrHome();
