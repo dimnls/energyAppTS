@@ -1,0 +1,37 @@
+import {App, Platform, Storage, LocalStorage} from 'ionic-angular';
+import {StatusBar} from 'ionic-native';
+import {TabsPage} from './pages/tabs/tabs';
+import {IntroPage} from './pages/intro/intro';
+import {DataService} from './providers/data/data';
+
+@App({
+  template: '<ion-nav [root]="rootPage"></ion-nav>',
+  providers: [DataService],
+  config: { tabbarPlacement: 'bottom' } // http://ionicframework.com/docs/v2/api/config/Config/
+})
+export class MyApp {
+  rootPage: any = TabsPage;
+  local: LocalStorage;
+
+
+  constructor(platform: Platform) {
+    this.local = new Storage(LocalStorage);
+    this.local.get('introShown').then((result: any) => {
+      if(!result) {
+        this.rootPage = TabsPage;
+      } else {
+        this.local.set('introShown', 'true');
+        this.rootPage = IntroPage;
+        console.log('introShown='+this.local.get('introShown'));
+      }
+    })
+
+
+
+    platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      StatusBar.styleDefault();
+    });
+  }
+}
