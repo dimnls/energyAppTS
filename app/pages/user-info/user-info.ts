@@ -1,4 +1,4 @@
-import {Page, NavController, Alert} from 'ionic-angular';
+import {Page, NavController, NavParams, Alert} from 'ionic-angular';
 import {DataService} from '../../providers/data/data';
 var localForage = require('localforage');
 /*
@@ -11,13 +11,14 @@ var localForage = require('localforage');
   templateUrl: 'build/pages/user-info/user-info.html',
 })
 export class UserInfoPage {
-  username: String;
-  age: Number;
-  peopleinhouse: String;
+  username: string;
+  age: number;
+  peopleinhouse: string;
 
-  constructor(public nav: NavController, public dataService: DataService) {
+  constructor(public nav: NavController, public dataService: DataService, public navParams: NavParams) {
     this.nav = nav;
     this.dataService = dataService;
+    this.navParams = navParams;
     this.getAllUserInfo();
   }
 
@@ -29,7 +30,11 @@ export class UserInfoPage {
       this.dataService.localSetItem('name', username);
       this.dataService.localSetItem('age', age);
       this.dataService.localSetItem('PeopleInHouse', peopleinhouse);
+
+      this.navParams.get('appPage').username = username;
+      this.nav.pop(); //POP save page and return to home
     }
+
   }
 
   getUserInfo(key) {

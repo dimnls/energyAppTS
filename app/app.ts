@@ -21,14 +21,21 @@ export class MyApp {
   rootPage: any = TabsPage;
   menuPages: Array<{title: string, component: any}>;
   local: LocalStorage;
+  //UserInfo vars
+  username: string;
+  // age: number;
+  // peopleinhouse: string;
 
-
-  constructor(private platform: Platform, private menu: MenuController) {
+  constructor(private platform: Platform, private menu: MenuController, private dataService: DataService) {
     this.initializeApp();
     this.menuPages = [
       {title: 'Edit user info', component: UserInfoPage},
       {title: 'Watch intro', component: IntroPage}
     ];
+    this.dataService.localGetItem('name').then((value) => {
+      this.username = value;
+    });
+
 
     this.goToIntroOrHome();
   }
@@ -58,7 +65,7 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.push(page.component);
+    this.nav.push(page.component, {appPage: this});
   }
 
 }

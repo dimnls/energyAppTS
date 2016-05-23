@@ -5,11 +5,27 @@
   </ion-toolbar>
 
   <ion-content>
+
+    <ion-card>
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="images/user_icon.png">
+        </ion-avatar>
+        <h2>{{username}}</h2>
+        <p>In vino veritas.</p>
+      </ion-item>
+
+      <ion-card-content>
+        <p>Hello, Dionysos! How are you doing?</p>
+      </ion-card-content>
+    </ion-card>
+
     <ion-list>
       <button ion-item *ngFor="let p of menuPages" (click)="openMenuPage(p)">
         {{p.title}}
       </button>
     </ion-list>
+
   </ion-content>
 
 </ion-menu>

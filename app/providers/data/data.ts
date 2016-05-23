@@ -42,7 +42,7 @@ export class DataService {
   localSetItem(key: String, value: any) {
     return localForage.setItem(key, value);
   }
-  
+
   localGetItem(key: String) {
     return localForage.getItem(key);
   }
