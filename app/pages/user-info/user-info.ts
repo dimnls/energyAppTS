@@ -31,6 +31,10 @@ export class UserInfoPage {
       this.dataService.localSetItem('age', age);
       this.dataService.localSetItem('PeopleInHouse', peopleinhouse);
 
+      this.dataService.sqlSave('sqlName', username);
+      this.dataService.sqlSave('sqlAge', age);
+      this.dataService.sqlSave('sqlPeople', peopleinhouse);
+
       this.navParams.get('appPage').username = username;
       this.nav.pop(); //POP save page and return to home
     }

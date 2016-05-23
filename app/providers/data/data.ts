@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Storage, SqlStorage} from 'ionic-angular';
 import 'rxjs/add/operator/map';
 
 // import localForage = require('localforage');
@@ -14,36 +14,26 @@ var localForage = require('localforage');
 @Injectable()
 export class DataService {
   data: any = null;
+  sql: Storage;
 
-  constructor(public http: Http) {}
+  constructor() {
+    this.sql = new Storage(SqlStorage, {name: 'UserDetails'});
 
-  load() {
-    if (this.data) {
-      // already loaded data
-      return Promise.resolve(this.data);
-    }
-
-    // don't have the data yet
-    return new Promise(resolve => {
-      // We're using Angular Http provider to request the data,
-      // then on the response it'll map the JSON data to a parsed JS object.
-      // Next we process the data and resolve the promise with the new data.
-      this.http.get('path/to/data.json')
-        .map(res => res.json())
-        .subscribe(data => {
-          // we've got back the raw data, now generate the core schedule data
-          // and save the data for later reference
-          this.data = data;
-          resolve(this.data);
-        });
-    });
   }
 
-  localSetItem(key: String, value: any) {
+  localSetItem(key: string, value: any) {
     return localForage.setItem(key, value);
   }
 
-  localGetItem(key: String) {
+  localGetItem(key: string) {
     return localForage.getItem(key);
   }
+
+  sqlGet(key: string) {
+    return this.sql.get(key)
+  }
+  sqlSave(key: string, value: any) {
+    this.sql.set(key, value);
+  }
+
 }
