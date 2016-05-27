@@ -7,6 +7,10 @@ import {IntroPage} from './pages/intro/intro';
 import {DataService} from './providers/data/data';
 import {UserInfoPage} from './pages/user-info/user-info'; //REMEMBER to import all pages needed for the menu
 
+// var text = require('./tips.json');
+var text = '{ "name": "John Johnson", "street": "Oslo street", "phone": 123456 }';
+var obj = JSON.parse(text);
+
 @App({
   // template: '<ion-nav [root]="rootPage"></ion-nav>',
   templateUrl: 'build/app.html', //FOR MENU
@@ -23,8 +27,7 @@ export class MyApp {
   local: LocalStorage;
   //UserInfo vars
   username: string;
-  // age: number;
-  // peopleinhouse: string;
+  //Tips
 
   constructor(private platform: Platform, private menu: MenuController, private dataService: DataService) {
     this.initializeApp();
@@ -36,6 +39,7 @@ export class MyApp {
       this.username = value;
     });
 
+    console.log(obj.name);
 
     this.goToIntroOrHome();
   }
@@ -67,5 +71,16 @@ export class MyApp {
     // navigate to the new page if it is not the current page
     this.nav.push(page.component, {appPage: this});
   }
+
+  tipsInit() {
+    // this.tips = [];
+    // this.tips.push({
+    //   id: '1',
+    //   title: 'Save Energy!',
+    //   description: 'There are many ways you can save energy!',
+    //   icon: 'flask'
+    // });
+  }
+
 
 }

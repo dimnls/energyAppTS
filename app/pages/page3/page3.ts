@@ -12,9 +12,10 @@ export class Page3 {
   date: String;
   constructor() {
     this.energyItemsPage = EnergyItemsPage;
+
+    //Set up date display
     this.time = new Date();
     setInterval(() => this.time = new Date(), 1000);
     this.date = this.time.toDateString();
-
   }
 }

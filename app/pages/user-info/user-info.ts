@@ -15,11 +15,16 @@ export class UserInfoPage {
   age: number;
   peopleinhouse: string;
 
+  public hero: string = "Superman";
+  public power: string = "It's goddamn Superman!";
+
+
   constructor(public nav: NavController, public dataService: DataService, public navParams: NavParams) {
     this.nav = nav;
     this.dataService = dataService;
     this.navParams = navParams;
     this.getAllUserInfo();
+    console.log('My hero is ' + this.hero);
   }
 
   saveUserInfo(username, age, peopleinhouse) {
