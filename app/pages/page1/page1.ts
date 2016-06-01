@@ -1,4 +1,4 @@
-import {Page, NavController} from 'ionic-angular';
+import {Page, NavController, Platform} from 'ionic-angular';
 import {IntroPage} from '../intro/intro';
 import {TabsPage} from '../tabs/tabs';
 import {UserInfoPage} from '../user-info/user-info';
@@ -7,8 +7,9 @@ import {UserInfoPage} from '../user-info/user-info';
   templateUrl: 'build/pages/page1/page1.html',
 })
 export class Page1 {
-  constructor(public nav: NavController) {
+  constructor(public nav: NavController, public platform: Platform) {
     this.nav = nav;
+    this.platform = platform;
   }
 
   goToIntro() {
@@ -19,5 +20,9 @@ export class Page1 {
 
   goToUserInfo() {
     this.nav.push(UserInfoPage);
+  }
+
+  socialShare(){
+    window.plugins.socialsharing.share('Message, image and link', null, 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl');
   }
 }

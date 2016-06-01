@@ -10,12 +10,37 @@
 
 <ion-content padding class="energy-items">
 
-  <ion-list>
-    <button ion-item *ngFor="#item of items" (click)="itemTapped($event, item)">
+  <!-- <ion-list>
+    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
       <ion-icon name="{{item.icon}}" item-left></ion-icon>
       {{item.title}}
       <div class="item-note" item-right>
         {{item.note}}
+      </div>
+    </button>
+  </ion-list> -->
+  <ion-list>
+    <button ion-item (click)="itemTapped($event, item)">
+      <ion-icon name="flask" item-left></ion-icon>
+      Flask
+      <div class="item-note" item-right>
+        100W
+      </div>
+    </button>
+
+    <button ion-item (click)="itemTapped($event, item)">
+      <ion-icon name="wifi" item-left></ion-icon>
+      Wifi
+      <div class="item-note" item-right>
+        200W
+      </div>
+    </button>
+
+    <button ion-item (click)="itemTapped($event, item)">
+      <ion-icon name="beer" item-left></ion-icon>
+      Beer
+      <div class="item-note" item-right>
+        300W
       </div>
     </button>
   </ion-list>

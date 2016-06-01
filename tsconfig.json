@@ -7,7 +7,8 @@
   },
   "filesGlob": [
     "**/*.ts",
-    "!node_modules/**/*"
+    "!node_modules/**/*",
+    "app/ngcordova.d.ts"
   ],
   "exclude": [
     "node_modules",

@@ -13,7 +13,6 @@ export class EnergyItemsPage {
   icons: String[];
   items: any;
   constructor(public nav: NavController) {
-    this.nav = nav;
     this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
     'american-football', 'boat', 'bluetooth', 'build'];
 
