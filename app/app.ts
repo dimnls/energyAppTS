@@ -7,9 +7,12 @@ import {IntroPage} from './pages/intro/intro';
 import {DataService} from './providers/data/data';
 import {UserInfoPage} from './pages/user-info/user-info'; //REMEMBER to import all pages needed for the menu
 
+// import { FORM_PROVIDERS } from '@angular/common';
+
+//JSON experiments
 // var text = require('./tips.json');
-var text = '{ "name": "John Johnson", "street": "Oslo street", "phone": 123456 }';
-var obj = JSON.parse(text);
+// var text = '{ "name": "John Johnson", "street": "Oslo street", "phone": 123456 }';
+// var obj = JSON.parse(text);
 
 @App({
   // template: '<ion-nav [root]="rootPage"></ion-nav>',
@@ -39,7 +42,8 @@ export class MyApp {
       this.username = value;
     });
 
-    console.log(obj.name);
+    // JSON experiments
+    // console.log(obj.name);
 
     this.goToIntroOrHome();
   }

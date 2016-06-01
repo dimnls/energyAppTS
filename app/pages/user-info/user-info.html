@@ -1,35 +1,61 @@
 <ion-navbar *navbar>
   <ion-title>User Info</ion-title>
   <ion-buttons end>
-		<button (click)="saveUserInfo(username, age, peopleinhouse)">Save</button>
-	</ion-buttons>
+      <button (click)="saveUserInfo(username, age, peopleinhouse)">Save</button>
+  </ion-buttons>
 </ion-navbar>
 
 <ion-content padding class="user-info">
-
   <!-- <h4>What I know about you:</h4> -->
   <ion-card>
-  <ion-list>
-    <ion-item>
-      <ion-label inline>Name:</ion-label>
-      <ion-input type="text" [(ngModel)]="username"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label inline>Age:</ion-label>
-      <ion-input type="number" [(ngModel)]="age"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label inline>People in the house:</ion-label>
-      <ion-select [(ngModel)]="peopleinhouse">
-        <ion-option value="1">I live alone</ion-option>
-        <ion-option value="2">2 people</ion-option>
-        <ion-option value="3+">3+ people</ion-option>
+    <ion-list>
+      <ion-item>
+        <ion-label inline>Name:</ion-label>
+        <ion-input type="text" [(ngModel)]="username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label inline>Age:</ion-label>
+        <ion-input type="number" [(ngModel)]="age"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label inline>People in the house:</ion-label>
+        <ion-select [(ngModel)]="peopleinhouse">
+          <ion-option value="1">I live alone</ion-option>
+          <ion-option value="2">2 people</ion-option>
+          <ion-option value="3+">3+ people</ion-option>
         </ion-select>
-    </ion-item>
-  </ion-list>
-</ion-card>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 
-<button full large energy-purple (click)="saveUserInfo(username, age, peopleinhouse)">Save</button>
-<button full large energy-purple (click)="getAllUserInfo()">Load</button>
-<!-- <button full large energy-purple (click)="fieldsAlert()">Alert</button> -->
+  <!-- <form [ngFormModel]="userInfoForm" (submit)="submitUserInfo($event)">
+    <ion-list>
+      <ion-item>
+        <ion-label inline>Name:</ion-label>
+        <ion-input type="text" [(ngModel)]="username" ngControl="username"></ion-input>
+        <div *ngIf="!userInfoForm.username.valid" class="alert alert-danger">
+          Name is required.
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label inline>Age:</ion-label>
+        <ion-input type="number" [(ngModel)]="age" ngControl="age"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label inline>People in the house:</ion-label>
+        <ion-select [(ngModel)]="peopleinhouse" ngControl="peopleinhouse">
+          <ion-option value="1">I live alone</ion-option>
+          <ion-option value="2">2 people</ion-option>
+          <ion-option value="3+">3+ people</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <button block type="submit" [disabled]="!userInfoForm.valid">Submit</button>
+
+    </ion-list>
+  </form> -->
+
+  <button full large energy-purple (click)="saveUserInfo(username, age, peopleinhouse)">Save</button>
+  <button full large energy-purple (click)="getAllUserInfo()">Load</button>
+  <!-- <button full large energy-purple (click)="fieldsAlert()">Alert</button> -->
 </ion-content>

@@ -1,6 +1,11 @@
 import {Page, NavController, NavParams, Alert} from 'ionic-angular';
 import {DataService} from '../../providers/data/data';
 var localForage = require('localforage');
+import {FormBuilder, Validators, NgForm} from '@angular/common';
+
+import { FORM_PROVIDERS } from '@angular/common';
+
+
 /*
   Generated class for the UserInfoPage page.
 
@@ -15,16 +20,26 @@ export class UserInfoPage {
   age: number;
   peopleinhouse: string;
 
-  public hero: string = "Superman";
-  public power: string = "It's goddamn Superman!";
+  userInfoForm: any;
 
-
-  constructor(public nav: NavController, public dataService: DataService, public navParams: NavParams) {
+  constructor(public nav: NavController, public dataService: DataService, public navParams: NavParams, form: FormBuilder) {
     this.nav = nav;
     this.dataService = dataService;
     this.navParams = navParams;
+
+    this.userInfoForm = form.group({
+      username: ["", Validators.required],
+      age: ["", Validators.required],
+      peopleinhouse: ["", Validators.required]
+    });
+
     this.getAllUserInfo();
-    console.log('My hero is ' + this.hero);
+  }
+
+  submitUserInfo(event) {
+    console.log(this.userInfoForm.value);
+    event.preventDefault();
+    console.log(this.userInfoForm.value.username);
   }
 
   saveUserInfo(username, age, peopleinhouse) {
