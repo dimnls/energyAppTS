@@ -14,6 +14,8 @@ import {UserInfoPage} from './pages/user-info/user-info'; //REMEMBER to import a
 // var text = '{ "name": "John Johnson", "street": "Oslo street", "phone": 123456 }';
 // var obj = JSON.parse(text);
 
+var text = './tips.json'
+
 @App({
   // template: '<ion-nav [root]="rootPage"></ion-nav>',
   templateUrl: 'build/app.html', //FOR MENU
@@ -30,7 +32,6 @@ export class MyApp {
   local: LocalStorage;
   //UserInfo vars
   username: string;
-  //Tips
 
   constructor(private platform: Platform, private menu: MenuController, private dataService: DataService) {
     this.initializeApp();

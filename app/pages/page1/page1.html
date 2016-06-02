@@ -6,20 +6,44 @@
 </ion-navbar>
 
 <ion-content padding class="page1">
-  <ion-card>
+
+  <!-- <ion-card>
     <img src="images/blue-energy.jpg" />
     <ion-card-content>
       <ion-card-title>
-          Electricity is produced in many ways!
+          Electricity is produced in many ways! Ζήτω ο Ηλεκτρισμός!
       </ion-card-title>
       <p>
         Fossil fuels, wind energy, solar energy and nuclear energy are some of the methods we use to produce electricity.
       </p>
     </ion-card-content>
+    <ion-item>
+      <button primary clear item-right (click)="readMore(item)">
+        <div>MORE</div>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-card> -->
+
+  <ion-card class="currentTip">
+    <img src="{{item.image}}" />
+    <ion-card-content>
+      <ion-card-title>
+        {{item.title}}
+      </ion-card-title>
+      <p>
+        {{item.description}}
+      </p>
+    </ion-card-content>
+    <ion-item>
+      <button primary clear item-right (click)="readMore(item)">
+        <div>MORE</div>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-item>
   </ion-card>
 
   <ion-card>
-
     <ion-item>
       <ion-avatar item-left>
         <img src="images/user_icon.png">
@@ -31,13 +55,18 @@
     <ion-card-content>
       <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
     </ion-card-content>
-
+    <ion-item>
+      <button primary clear item-right (click)="socialShare()">
+        <div>SHARE</div>
+        <ion-icon name="share"></ion-icon>
+      </button>
+    </ion-item>
   </ion-card>
 
   <!-- Social Share -->
-  <ion-card>
-    <button full (click)="socialShare()">Social Share</button>
-  </ion-card>
+  <button full (click)="socialShare()">Social Share</button>
+  <button full danger (click)="facebookShare()">Facebook Share</button>
+
 
 </ion-content>
 <!--
