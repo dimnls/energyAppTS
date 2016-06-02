@@ -8,23 +8,37 @@ import {ItemDetailsPage} from '../item-details/item-details';
   templateUrl: 'build/pages/page1/page1.html',
 })
 export class Page1 {
-  item: any;
-  tipsJSON: any = require('../../tips.json');
+  tips: any = require('../../tips.json');
+  currentTipId: number;
+  currentTip: any;
 
   constructor(public nav: NavController, public platform: Platform) {
-    this.nav = nav;
-    this.platform = platform;
-
-    this.item = {id: '1', title: 'Item 1', description: 'Item 1 description. Lorem ipsum.', image: 'images/blue-energy.jpg'};
 
     this.randomTip();
-    console.log(this.tipsJSON[1]);
+    console.log('Random Tip id:' + this.currentTipId);
+
+    this.currentTip = this.tips[this.currentTipId];
 
 
   }
 
   randomTip() {
+    this.currentTipId = Math.floor(Math.random() * this.tips.length);
+  }
 
+  getNewTip() {
+    let oldTipId: number = this.currentTipId;
+    let newCurrentTipId: number = oldTipId;
+    console.log('oldTipId: ' + oldTipId);
+    console.log('newCurrentTipId: ' + newCurrentTipId);
+    do {
+      newCurrentTipId = Math.floor(Math.random() * this.tips.length);
+      console.log('while loop newCurrentTipId: ' + newCurrentTipId);
+    }
+    while( newCurrentTipId == oldTipId );
+    console.log('exited while loop');
+    this.currentTipId = newCurrentTipId;
+    this.currentTip = this.tips[this.currentTipId];
   }
 
   goToIntro() {

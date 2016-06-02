@@ -1,14 +1,26 @@
 [
     {
-      "id": "1",
+      "id": "0",
       "title": "Item 1",
       "description": "Item 1 description. Lorem ipsum.",
       "image": "images/blue-energy.jpg"
     },
     {
-      "id": "2",
+      "id": "1",
       "title": "Item 2",
       "description": "Item 2 description. Lorem ipsum.",
+      "image": "images/all-over-again.png"
+    },
+    {
+      "id": "2",
+      "title": "Item 3",
+      "description": "Item 3 description. Lorem ipsum.",
+      "image": "images/blue-energy.jpg"
+    },
+    {
+      "id": "3",
+      "title": "Item 4",
+      "description": "Item 4 description. Lorem ipsum.",
       "image": "images/blue-energy.jpg"
     }
 ]

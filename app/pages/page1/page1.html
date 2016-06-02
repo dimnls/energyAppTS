@@ -26,21 +26,29 @@
   </ion-card> -->
 
   <ion-card class="currentTip">
-    <img src="{{item.image}}" />
+    <img src="{{currentTip.image}}" />
     <ion-card-content>
       <ion-card-title>
-        {{item.title}}
+        {{currentTip.title}}
       </ion-card-title>
       <p>
-        {{item.description}}
+        {{currentTip.description}}
       </p>
     </ion-card-content>
-    <ion-item>
-      <button primary clear item-right (click)="readMore(item)">
-        <div>MORE</div>
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-item>
+    <ion-row>
+      <ion-item>
+        <button primary clear item-right (click)="readMore(currentTip)">
+          <div>MORE</div>
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item>
+        <button primary clear item-right (click)="getNewTip()">
+          <div>NEW TIP</div>
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-row>
   </ion-card>
 
   <ion-card>
