@@ -37,13 +37,19 @@
     </ion-card-content>
     <ion-row>
       <ion-item>
-        <button primary clear item-right (click)="readMore(currentTip)">
-          <div>MORE</div>
+        <button primary clear item-right (click)="readMore()">
+          <div>READ MORE</div>
           <ion-icon name="add"></ion-icon>
         </button>
       </ion-item>
       <ion-item>
-        <button primary clear item-right (click)="getNewTip()">
+        <button primary clear item-right (click)="socialShare()">
+          <div>SHARE</div>
+          <ion-icon name="share"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item>
+        <button primary clear item-right (click)="loadingTip()">
           <div>NEW TIP</div>
           <ion-icon name="refresh"></ion-icon>
         </button>
@@ -52,24 +58,25 @@
   </ion-card>
 
   <ion-card>
-    <ion-item>
-      <ion-avatar item-left>
-        <img src="images/user_icon.png">
-      </ion-avatar>
-      <h2>Marty McFly</h2>
-      <p>November 5, 1955</p>
-    </ion-item>
-
     <ion-card-content>
-      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+    <ion-card-title>Status: {{ totalConsumedToday }}</ion-card-title>
+    <p>
+      status number: {{status}}
+    </p>
     </ion-card-content>
-    <ion-item>
-      <button primary clear item-right (click)="socialShare()">
-        <div>SHARE</div>
-        <ion-icon name="share"></ion-icon>
-      </button>
-    </ion-item>
+    <ion-row>
+      <ion-item>
+        <button primary clear item-right (click)="refreshStatus()">
+          <div>REFRESH</div>
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-row>
   </ion-card>
+  <ion-row>
+    <img class="statusImage" src="/images/{{status}}.jpg"  />
+  </ion-row>
+
 
   <!-- Social Share -->
   <button full (click)="socialShare()">Social Share</button>
@@ -77,9 +84,3 @@
 
 
 </ion-content>
-<!--
-<style>
-  .page1 ion-col {
-    padding: 0;
-  }
-</style> -->

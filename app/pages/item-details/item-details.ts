@@ -1,4 +1,4 @@
-import {Page, NavController} from 'ionic-angular';
+import {Page, NavController, NavParams} from 'ionic-angular';
 
 /*
   Generated class for the ItemDetailsPage page.
@@ -10,5 +10,9 @@ import {Page, NavController} from 'ionic-angular';
   templateUrl: 'build/pages/item-details/item-details.html',
 })
 export class ItemDetailsPage {
-  constructor(public nav: NavController) {}
+  currentTip: any;
+
+  constructor(public nav: NavController, public navParams: NavParams) {
+    this.currentTip = this.navParams.get('dashPage').currentTip;
+  }
 }

@@ -6,7 +6,7 @@
 </ion-navbar>
 
 <ion-content padding class="page3">
-  <h1>Consume Energy</h1>
+  <!-- <h1>Consume Energy</h1>
   <p>
     The current date is: <b>{{date}}</b>
   </p>
@@ -24,6 +24,15 @@
 
   <button fab fab-bottom fab-right energy-purple [navPush]="energyItemsPage">
     <ion-icon name="flash"></ion-icon>
-  </button>
+  </button> -->
+
+  <h1> Total W today: {{ totalConsumedToday }}</h1>
+  <ion-list>
+    <button ion-item *ngFor="let appliance of appliances" (click)="applianceTapped($event, appliance)">
+      {{ appliance.title }}
+    </button>
+  </ion-list>
+  {{date}}
+  <button full (click)="clearConsumption()">Clear All</button>
 
 </ion-content>
