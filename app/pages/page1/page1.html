@@ -7,25 +7,35 @@
 
 <ion-content padding class="page1">
 
-  <!-- <ion-card>
-    <img src="images/blue-energy.jpg" />
+  <ion-card>
     <ion-card-content>
-      <ion-card-title>
-          Electricity is produced in many ways! Ζήτω ο Ηλεκτρισμός!
-      </ion-card-title>
-      <p>
-        Fossil fuels, wind energy, solar energy and nuclear energy are some of the methods we use to produce electricity.
-      </p>
+    <ion-card-title>
+      {{ currentStatus.title }}
+    </ion-card-title>
+    <p>
+      {{ currentStatus.description }}
+    </p>
     </ion-card-content>
-    <ion-item>
-      <button primary clear item-right (click)="readMore(item)">
-        <div>MORE</div>
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-item>
-  </ion-card> -->
+    <ion-row>
+      <ion-item>
+        <button primary clear item-right (click)="refreshStatus()">
+          <div>REFRESH</div>
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-row>
+  </ion-card>
+  <ion-row>
+    <img class="statusImage" src="{{ currentStatus.image }}"  />
+  </ion-row>
+  <ion-row>
+    <button large block outline (click)="getNewTip()">
+      <ion-icon name="book"></ion-icon>
+      Get a new tip!
+    </button>
+  </ion-row>
 
-  <ion-card class="currentTip">
+  <!-- <ion-card class="currentTip">
     <img src="{{currentTip.image}}" />
     <ion-card-content>
       <ion-card-title>
@@ -55,32 +65,16 @@
         </button>
       </ion-item>
     </ion-row>
-  </ion-card>
+  </ion-card> -->
 
-  <ion-card>
-    <ion-card-content>
-    <ion-card-title>Status: {{ totalConsumedToday }}</ion-card-title>
-    <p>
-      status number: {{status}}
-    </p>
-    </ion-card-content>
-    <ion-row>
-      <ion-item>
-        <button primary clear item-right (click)="refreshStatus()">
-          <div>REFRESH</div>
-          <ion-icon name="refresh"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-row>
-  </ion-card>
-  <ion-row>
-    <img class="statusImage" src="/images/{{status}}.jpg"  />
-  </ion-row>
+
 
 
   <!-- Social Share -->
-  <button full (click)="socialShare()">Social Share</button>
-  <button full danger (click)="facebookShare()">Facebook Share</button>
+  <!-- <button full (click)="socialShare()">Social Share</button>
+  <button full danger (click)="facebookShare()">Facebook Share</button> -->
+  <button full (click)="socialShare()">Share your energy consumption</button>
+  <button danger full (click)="socialShare()">Spread the word!</button>
 
 
 </ion-content>

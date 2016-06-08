@@ -12,28 +12,35 @@ import {DataService} from '../../providers/data/data';
 })
 export class Page1 {
   tips: any = require('../../tips.json');
+  statuses: any = require('../../statuses.json');
+
   currentTipId: number;
   currentTip: any;
+
   totalConsumedToday: number;
   averageConsumption: number = 200;
-  status: number;
+
+  statusId: number = 4;
+  currentStatus: any;
 
   constructor(public nav: NavController, public platform: Platform, public dataService: DataService) {
     console.log('page1 constructor');
     this.nav = nav;
     this.platform = platform;
-
+    this.currentStatus  = this.statuses[this.statusId]
+    console.log('set status to 4');
 
     this.randomTip();
     this.currentTip = this.tips[this.currentTipId];
-
     this.refreshStatus();
+
   }
 
 
   //initial random tip
   randomTip() {
     this.currentTipId = Math.floor(Math.random() * this.tips.length);
+
   }
 
   //refreshing tip, different from current
@@ -69,17 +76,19 @@ export class Page1 {
       this.totalConsumedToday = value;
       console.log('loaded totalConsumedToday in Page1: ' + this.totalConsumedToday);
 
-      if(value == 0) {
-        this.status = 0;
+      if(value == null) {
+        this.statusId = 4;
       } else if(value >= (this.averageConsumption + 50)) {
-        this.status = 1;
+        this.statusId = 0;
       } else if(value > (this.averageConsumption)) {
-        this.status = 2;
+        this.statusId = 1;
       } else if(value <= (this.averageConsumption - 50)) {
-        this.status = 4;
+        this.statusId = 3;
       } else if (value <= (this.averageConsumption)) {
-        this.status = 3;
+        this.statusId = 2;
       }
+
+      this.currentStatus = this.statuses[this.statusId];
 
     });
   }

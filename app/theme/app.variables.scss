@@ -25,15 +25,31 @@
 // Both iOS and MD colors can be further customized if colors
 // are different per mode.
 
+  // primary:    #387ef5,
+
+// $cyan-light: #d3edf2;
+// $cyan-darker: #A6D3DB;
+// $blue-royal: #193136;
+// $purple-dark: #582C38;
+//
+//
+
+
 $colors: (
-  primary:    #387ef5,
+  primary: #387ef5,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
-  favorite:   #69BB7B,
-  energy: #FFFF00,
-  energy-light: #FFFF64,
-  energy-purple: #5E0DAC,
-  energy-purple-light: #8B54C1
+  favorite:   #69BB7B
 );
+
+
+
+$background-color: #f8f8f8;
+// $tabbar-md-background: #764D58;
+// $tab-button-md-active-color: #FFBCBA;
+$card-md-background-color: white;
+$card-md-border-radius: 0px;
+
+// $card-md-background-color: #FFDAD8;

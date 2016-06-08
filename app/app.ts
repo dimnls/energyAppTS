@@ -67,7 +67,7 @@ export class MyApp {
       //load saved date
       this.dataService.localGetItem('savedDate').then((value) => {
         this.savedDate = value;
-        this.savedDate = this.tempDate; //TODO remove
+        // this.savedDate = this.tempDate; //TODO remove
         if( this.date != this.savedDate ) {
           console.log('dates not equal');
           this.datesNotEqual = true;

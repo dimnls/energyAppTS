@@ -1,0 +1,32 @@
+[
+    {
+      "id": "0",
+      "title": "You make me wanna cry!",
+      "description": "You are using a lot more energy than the average! Please be more thoughtful!",
+      "image": "images/Amber/Amber_0024_cry.png"
+    },
+    {
+      "id": "1",
+      "title": "Hmmm you can do better!",
+      "description": "You are consuming above average. Perhaps you could try saving some energy?",
+      "image": "images/Amber/Amber_0001_skeptical.png"
+    },
+    {
+      "id": "2",
+      "title": "Good job!",
+      "description": "You are doing better than the average! Keep reducing your consumption!",
+      "image": "images/Amber/Amber_0020_smile.png"
+    },
+    {
+      "id": "3",
+      "title": "Wow! You are the best!",
+      "description": "You are doing an amazing job! I wish everybody was as thoughtful as you are!",
+      "image": "images/Amber/Amber_0022_success.png"
+    },
+    {
+      "id": "4",
+      "title": "Hmmm this is very interesting...",
+      "description": "Hit refresh to update your status!",
+      "image": "images/Amber/Amber_0019_book.png"
+    }
+]

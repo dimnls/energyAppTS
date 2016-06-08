@@ -36,7 +36,8 @@ export class Page3 {
       inputs: [
         {
           name: 'time',
-          placeholder: 'Time (hrs)'
+          placeholder: 'Time (hrs)',
+          type: 'number'
         },
       ],
       buttons: [
