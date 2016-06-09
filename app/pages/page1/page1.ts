@@ -31,7 +31,7 @@ export class Page1 {
 
     this.currentStatus  = this.statuses[this.statusId];
     this.dateCheck();
-    this.refreshStatus();
+    //this.refreshStatus();
 
 
     console.log('status = ' + this.statusId);
@@ -79,7 +79,11 @@ export class Page1 {
         console.log('dates not equal');
         this.datesNotEqual = true;
         this.dataService.localSetItem('savedDate', this.date);
-        this.dataService.localSetItem('totalConsumedToday', 0);
+        this.dataService.localSetItem('totalConsumedToday', 0).then(() => {
+          this.refreshStatus();
+        });
+      } else {
+        this.refreshStatus();
       }
     });
   }
