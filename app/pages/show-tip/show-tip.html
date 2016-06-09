@@ -1,0 +1,45 @@
+<!--
+  Generated template for the ShowTipPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar *navbar>
+  <ion-title>New Tip!</ion-title>
+</ion-navbar>
+
+<ion-content padding class="show-tip">
+
+  <ion-card class="currentTip">
+    <img src="{{currentTip.image}}" />
+    <ion-card-content>
+      <ion-card-title>
+        {{currentTip.title}}
+      </ion-card-title>
+      <p>
+        {{currentTip.description}}
+      </p>
+    </ion-card-content>
+    <ion-row>
+      <ion-item>
+        <button primary clear item-right (click)="readMore()">
+          <div>READ MORE</div>
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item>
+        <button primary clear item-right (click)="socialShare()">
+          <div>SHARE</div>
+          <ion-icon name="share"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item>
+        <button primary clear item-right (click)="loadingTip()">
+          <div>NEW TIP</div>
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-row>
+  </ion-card>
+
+</ion-content>

@@ -6,16 +6,13 @@ import {ItemDetailsPage} from '../item-details/item-details';
 import {SocialSharing} from 'ionic-native';
 import {Page3} from '../page3/page3';
 import {DataService} from '../../providers/data/data';
+import {ShowTipPage} from '../show-tip/show-tip';
 
 @Page({
   templateUrl: 'build/pages/page1/page1.html',
 })
 export class Page1 {
-  tips: any = require('../../tips.json');
   statuses: any = require('../../statuses.json');
-
-  currentTipId: number;
-  currentTip: any;
 
   totalConsumedToday: number;
   averageConsumption: number = 200;
@@ -23,50 +20,26 @@ export class Page1 {
   statusId: number = 4;
   currentStatus: any;
 
+  time: Date;
+  date: string;
+  savedDate: string;
+  tempDate: string = 'Tue Jun 07 2016';
+  datesNotEqual: boolean;
+
   constructor(public nav: NavController, public platform: Platform, public dataService: DataService) {
     console.log('page1 constructor');
-    this.nav = nav;
-    this.platform = platform;
-    this.currentStatus  = this.statuses[this.statusId]
-    console.log('set status to 4');
 
-    this.randomTip();
-    this.currentTip = this.tips[this.currentTipId];
+    this.currentStatus  = this.statuses[this.statusId];
+    this.dateCheck();
     this.refreshStatus();
 
-  }
 
-
-  //initial random tip
-  randomTip() {
-    this.currentTipId = Math.floor(Math.random() * this.tips.length);
+    console.log('status = ' + this.statusId);
 
   }
 
-  //refreshing tip, different from current
-  getNewTip() {
-    let oldTipId: number = this.currentTipId;
-    let newCurrentTipId: number = oldTipId;
-    do {
-      newCurrentTipId = Math.floor(Math.random() * this.tips.length);
-    }
-    while( newCurrentTipId == oldTipId );
-    this.currentTipId = newCurrentTipId;
-    this.currentTip = this.tips[this.currentTipId];
-  }
-
-  goToIntro() {
-    this.nav.push(IntroPage, {
-      pushed: true
-    });
-  }
-
-  goToUserInfo() {
-    this.nav.push(UserInfoPage);
-  }
-
-  readMore() {
-    this.nav.push(ItemDetailsPage, {
+  showTip() {
+    this.nav.push(ShowTipPage, {
       dashPage: this
     });
   }
@@ -76,7 +49,7 @@ export class Page1 {
       this.totalConsumedToday = value;
       console.log('loaded totalConsumedToday in Page1: ' + this.totalConsumedToday);
 
-      if(value == null) {
+      if(value == null || value == 0) {
         this.statusId = 4;
       } else if(value >= (this.averageConsumption + 50)) {
         this.statusId = 0;
@@ -89,11 +62,29 @@ export class Page1 {
       }
 
       this.currentStatus = this.statuses[this.statusId];
+      console.log('status refreshed, = ' + this.statusId);
 
     });
   }
 
-  socialShare(message: string = null, subject: string = null, file = this.currentTip.image_b64, link: string = null) {
+  dateCheck() {
+    this.time = new Date();
+    setInterval(() => this.time = new Date(), 1000);
+    this.date = this.time.toDateString();
+    //load saved date
+    this.dataService.localGetItem('savedDate').then((value) => {
+      this.savedDate = value;
+      //this.savedDate = this.tempDate; //TODO remove
+      if( this.date != this.savedDate ) {
+        console.log('dates not equal');
+        this.datesNotEqual = true;
+        this.dataService.localSetItem('savedDate', this.date);
+        this.dataService.localSetItem('totalConsumedToday', 0);
+      }
+    });
+  }
+
+  socialShare(message: string = 'I am using Amber to keep track of my Energy consumption! Get the app at http://meetamber.online', subject: string = null, file = null, link: string = 'http://meetamber.online') {
     this.platform.ready().then(() => {
       if(window.plugins.socialsharing) {
         window.plugins.socialsharing.share(message, subject, file, link);
@@ -121,27 +112,14 @@ export class Page1 {
   //   });
   // }
 
+  // facebookShare(message: string = null, subject: string = null, file: string = this.currentTip.image, link: string = null) {
+  //   this.platform.ready().then(() => {
+  //     if(window.plugins.socialsharing) {
+  //       window.plugins.socialsharing.shareViaFacebook(message, subject, file, link, function(errormsg) {alert("Error: Facebook not installed")});
+  //     }
+  //   });
+  // }
 
-
-  facebookShare(message: string = null, subject: string = null, file: string = this.currentTip.image, link: string = null) {
-    this.platform.ready().then(() => {
-      if(window.plugins.socialsharing) {
-        window.plugins.socialsharing.shareViaFacebook(message, subject, file, link, function(errormsg) {alert("Error: Facebook not installed")});
-      }
-    });
-  }
-
-  //show loader and call getNewTip() from loader
-  loadingTip() {
-    let loading = Loading.create({
-      content: "Getting tip...",
-    });
-    this.nav.present(loading);
-    setTimeout(() =>  {
-      loading.dismiss();
-      this.getNewTip();
-    }, 700);
-  }
 
 
 }

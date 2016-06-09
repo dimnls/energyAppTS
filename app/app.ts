@@ -31,12 +31,6 @@ export class MyApp {
   local: LocalStorage;
   //UserInfo vars
   username: string;
-  //date vars
-  time: Date;
-  date: string;
-  savedDate: string;
-  tempDate: string = 'Tue Jun 07 2016';
-  datesNotEqual: boolean;
 
   constructor(private platform: Platform, private menu: MenuController, private dataService: DataService) {
     console.log('app constructor');
@@ -59,23 +53,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
 
-      //Set up date (Wed Jun 08 2016)
-      //get current date
-      this.time = new Date();
-      setInterval(() => this.time = new Date(), 1000);
-      this.date = this.time.toDateString();
-      //load saved date
-      this.dataService.localGetItem('savedDate').then((value) => {
-        this.savedDate = value;
-        // this.savedDate = this.tempDate; //TODO remove
-        if( this.date != this.savedDate ) {
-          console.log('dates not equal');
-          this.datesNotEqual = true;
-          this.dataService.localSetItem('savedDate', this.date);
-          this.dataService.localSetItem('totalConsumedToday', 0);
-        }
-      });
-
     });
   }
   //Check if it's first run and show Intro if it is. Other wise, jump into app
@@ -97,16 +74,6 @@ export class MyApp {
     this.menu.close();
     // navigate to the new page if it is not the current page
     this.nav.push(page.component, {appPage: this});
-  }
-
-  tipsInit() {
-    // this.tips = [];
-    // this.tips.push({
-    //   id: '1',
-    //   title: 'Save Energy!',
-    //   description: 'There are many ways you can save energy!',
-    //   icon: 'flask'
-    // });
   }
 
 

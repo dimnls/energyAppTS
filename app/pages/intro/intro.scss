@@ -1,13 +1,21 @@
 //.intro {
 ion-slide{
-    background-color: cyan;
+    background-color: #f4f4f4;
 }
 
 img.slide-image {
-    height: 70vh !important;
+    height: 50vh !important;
     width: auto !important;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 }
 h1.slide-title {
-  color: white;
+  color: #222;
 }
+
+p {
+  margin-left: 5vh;
+  margin-right: 5vh;
+}
+
 //}

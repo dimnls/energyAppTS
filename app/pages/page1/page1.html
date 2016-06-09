@@ -29,50 +29,13 @@
     <img class="statusImage" src="{{ currentStatus.image }}"  />
   </ion-row>
   <ion-row>
-    <button large block outline (click)="getNewTip()">
+    <button large block outline (click)="showTip()">
       <ion-icon name="book"></ion-icon>
       Get a new tip!
     </button>
   </ion-row>
 
-  <!-- <ion-card class="currentTip">
-    <img src="{{currentTip.image}}" />
-    <ion-card-content>
-      <ion-card-title>
-        {{currentTip.title}}
-      </ion-card-title>
-      <p>
-        {{currentTip.description}}
-      </p>
-    </ion-card-content>
-    <ion-row>
-      <ion-item>
-        <button primary clear item-right (click)="readMore()">
-          <div>READ MORE</div>
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-item>
-      <ion-item>
-        <button primary clear item-right (click)="socialShare()">
-          <div>SHARE</div>
-          <ion-icon name="share"></ion-icon>
-        </button>
-      </ion-item>
-      <ion-item>
-        <button primary clear item-right (click)="loadingTip()">
-          <div>NEW TIP</div>
-          <ion-icon name="refresh"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-row>
-  </ion-card> -->
-
-
-
-
   <!-- Social Share -->
-  <!-- <button full (click)="socialShare()">Social Share</button>
-  <button full danger (click)="facebookShare()">Facebook Share</button> -->
   <button full (click)="socialShare()">Share your energy consumption</button>
   <button danger full (click)="socialShare()">Spread the word!</button>
 
