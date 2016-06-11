@@ -26,11 +26,50 @@
     <ion-icon name="flash"></ion-icon>
   </button> -->
 
-  <h1> Total W today: {{ totalConsumedToday }}</h1>
+  <!-- <h1> Total W today: {{ totalConsumedToday }}</h1>
   <ion-list>
     <button ion-item *ngFor="let appliance of appliances" (click)="applianceTapped($event, appliance)">
       {{ appliance.title }}
     </button>
+  </ion-list>
+  {{date}}
+  <button full (click)="clearConsumption()">Clear All</button> -->
+  <button (click)="myChangeDate()">change date</button>
+  <h1> Total W today: {{ totalConsumedToday }}</h1>
+  <ion-list class="appliances-list">
+      <ion-item *ngFor="let appliance of appliances">
+        <ion-row>
+          <ion-col>
+            <ion-row>
+              <h2>{{ appliance.title }}</h2>
+            </ion-row>
+            <ion-row>
+              <img class="appliances" src="{{ appliance.image }}" />
+            </ion-row>
+            <ion-row>
+              <p>
+                {{appliance.wattsPerHour}} W/hr
+              </p>
+            </ion-row>
+          </ion-col>
+          <ion-col>
+            <ion-row>
+              <h3>USAGE TIME</h3>
+            </ion-row>
+            <ion-row>
+              <h3>USAGE WATTS</h3>
+            </ion-row>
+          </ion-col>
+          <ion-col>
+            <ion-row>
+              <button small danger (click)="increaseAppliance($event, appliance)"><ion-icon name="add"></ion-icon></button>
+            </ion-row>
+            <ion-row>
+              <button small (click)="decreaseAppliance($event, appliance)"><ion-icon name="remove"></ion-icon></button>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-item>
   </ion-list>
   {{date}}
   <button full (click)="clearConsumption()">Clear All</button>

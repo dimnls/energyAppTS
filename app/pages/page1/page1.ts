@@ -1,4 +1,4 @@
-import {Page, NavController, Platform, Loading} from 'ionic-angular';
+import {Page, NavController, Platform, Loading, NavParams} from 'ionic-angular';
 import {IntroPage} from '../intro/intro';
 import {TabsPage} from '../tabs/tabs';
 import {UserInfoPage} from '../user-info/user-info';
@@ -7,6 +7,7 @@ import {SocialSharing} from 'ionic-native';
 import {Page3} from '../page3/page3';
 import {DataService} from '../../providers/data/data';
 import {ShowTipPage} from '../show-tip/show-tip';
+import {DayModel} from '../../models/day-model';
 
 @Page({
   templateUrl: 'build/pages/page1/page1.html',
@@ -22,19 +23,26 @@ export class Page1 {
 
   time: Date;
   date: string;
-  savedDate: string;
+  lastDate: string;
   tempDate: string = 'Tue Jun 07 2016';
-  datesNotEqual: boolean;
 
-  constructor(public nav: NavController, public platform: Platform, public dataService: DataService) {
-    console.log('page1 constructor');
+  today: DayModel;
+
+  myDay: DayModel; //TODO: remove
+  mySave() {};
+
+  constructor(public nav: NavController, public platform: Platform, public dataService: DataService, public navParams: NavParams) {
 
     this.currentStatus  = this.statuses[this.statusId];
-    this.dateCheck();
-    //this.refreshStatus();
+    this.dateCheck(); //refresh status through dateCheck()
 
+    //New Day
+    this.today = new DayModel(this.date);
+    this.dataService.localSetItem('today', this.today);
 
-    console.log('status = ' + this.statusId);
+    //model test TODO: remove
+    this.myDay = this.navParams.get('day');
+    this.mySave = this.navParams.get('save');
 
   }
 
@@ -45,44 +53,68 @@ export class Page1 {
   }
 
   refreshStatus() {
-    this.dataService.localGetItem('totalConsumedToday').then((value) => {
-      this.totalConsumedToday = value;
-      console.log('loaded totalConsumedToday in Page1: ' + this.totalConsumedToday);
-
-      if(value == null || value == 0) {
+    this.dataService.localGetItem('today').then((value) => {
+      this.today = value;
+      console.log('loaded today = ' + this.today); //TODO: remove
+      this.totalConsumedToday = this.today.totalConsumedThisDay;
+      console.log('loaded today totalConsumedThisDay = ' + this.totalConsumedToday); //TODO: remove
+      if(this.totalConsumedToday == null || value == 0) {
         this.statusId = 4;
-      } else if(value >= (this.averageConsumption + 50)) {
+      } else if(this.totalConsumedToday >= (this.averageConsumption + 50)) {
         this.statusId = 0;
-      } else if(value > (this.averageConsumption)) {
+      } else if(this.totalConsumedToday > (this.averageConsumption)) {
         this.statusId = 1;
-      } else if(value <= (this.averageConsumption - 50)) {
+      } else if(this.totalConsumedToday <= (this.averageConsumption - 50)) {
         this.statusId = 3;
-      } else if (value <= (this.averageConsumption)) {
+      } else if (this.totalConsumedToday <= (this.averageConsumption)) {
         this.statusId = 2;
       }
 
       this.currentStatus = this.statuses[this.statusId];
-      console.log('status refreshed, = ' + this.statusId);
 
     });
   }
 
+  // refreshStatus() {
+  //   this.dataService.localGetItem('totalConsumedToday').then((value) => {
+  //     this.totalConsumedToday = value;
+  //
+  //     if(value == null || value == 0) {
+  //       this.statusId = 4;
+  //     } else if(value >= (this.averageConsumption + 50)) {
+  //       this.statusId = 0;
+  //     } else if(value > (this.averageConsumption)) {
+  //       this.statusId = 1;
+  //     } else if(value <= (this.averageConsumption - 50)) {
+  //       this.statusId = 3;
+  //     } else if (value <= (this.averageConsumption)) {
+  //       this.statusId = 2;
+  //     }
+  //
+  //     this.currentStatus = this.statuses[this.statusId];
+  //
+  //   });
+  // }
+
   dateCheck() {
     this.time = new Date();
     setInterval(() => this.time = new Date(), 1000);
+    //get current date
     this.date = this.time.toDateString();
-    //load saved date
-    this.dataService.localGetItem('savedDate').then((value) => {
-      this.savedDate = value;
-      //this.savedDate = this.tempDate; //TODO remove
-      if( this.date != this.savedDate ) {
+    //load last saved date
+    this.dataService.localGetItem('lastDate').then((value) => {
+      this.lastDate = value;
+      //this.lastDate = this.tempDate; //TODO remove
+      console.log('last saved date: ' + this.lastDate); //TDOO remove
+
+      if( this.date != this.lastDate ) {
         console.log('dates not equal');
-        this.datesNotEqual = true;
-        this.dataService.localSetItem('savedDate', this.date);
+        this.dataService.localSetItem('lastDate', this.date);
         this.dataService.localSetItem('totalConsumedToday', 0).then(() => {
           this.refreshStatus();
         });
-      } else {
+
+      } else { //last saved date is today, simply refresh status
         this.refreshStatus();
       }
     });

@@ -3,18 +3,18 @@
       "id": "0",
       "title": "Hair dryer",
       "wattsPerHour": "35",
-      "image": "images/blue-energy.jpg"
+      "image": "images/appliances/bd.png"
     },
     {
       "id": "1",
       "title": "TV",
       "wattsPerHour": "20",
-      "image": "images/all-over-again.png"
+      "image": "images/appliances/tv.png"
     },
     {
       "id": "2",
       "title": "Oven",
       "wattsPerHour": "80",
-      "image": "images/blue-energy.jpg"
+      "image": "images/appliances/oven.png"
     }
 ]

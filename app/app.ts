@@ -7,14 +7,8 @@ import {IntroPage} from './pages/intro/intro';
 import {DataService} from './providers/data/data';
 import {UserInfoPage} from './pages/user-info/user-info'; //REMEMBER to import all pages needed for the menu
 import {Page1} from './pages/page1/page1';
-// import { FORM_PROVIDERS } from '@angular/common';
 
-//JSON experiments
-// var text = require('./tips.json');
-// var text = '{ "name": "John Johnson", "street": "Oslo street", "phone": 123456 }';
-// var obj = JSON.parse(text);
 
-var text = './tips.json'
 @App({
   // template: '<ion-nav [root]="rootPage"></ion-nav>',
   templateUrl: 'build/app.html', //FOR MENU
@@ -33,7 +27,7 @@ export class MyApp {
   username: string;
 
   constructor(private platform: Platform, private menu: MenuController, private dataService: DataService) {
-    console.log('app constructor');
+
     this.initializeApp();
     this.menuPages = [
       {title: 'Edit user info', component: UserInfoPage},
