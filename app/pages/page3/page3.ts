@@ -11,37 +11,21 @@ export class Page3 {
   date: string;
 
   appliances: any = require('../../appliances.json');
-  totalConsumedToday: number;
-
-  //myDay: DayModel;
 
   constructor(public nav: NavController, public dataService: DataService, public navParams: NavParams, public myDay: DayModel) {
     this.myDay = myDay;
 
   }
 
-  // increaseAppliance(event, appliance) {
-  //   var applianceChange: number = appliance.wattsPerHour * 1;
-  //
-  //   this.today.appliancesConsumption[appliance.id][1] += 1;
-  //   this.today.appliancesConsumption[appliance.id][2] += applianceChange;
-  //
-  //   this.today.totalConsumedThisDay += applianceChange;
-  //   this.totalConsumedToday = this.today.totalConsumedThisDay;
-  //   this.dataService.localSetItem('today', this.today).then(() => {
-  //     return;
-  //   });
-  //
-  // }
-
   increaseAppliance(event, appliance) {
     var applianceChange: number = appliance.wattsPerHour * 1;
 
     this.myDay.appliancesConsumption[appliance.id][1] += 1;
     this.myDay.appliancesConsumption[appliance.id][2] += applianceChange;
-
     this.myDay.totalConsumedThisDay += applianceChange;
-    //this.totalConsumedToday = this.myDay.totalConsumedThisDay;
+
+    this.myDay.refreshStatus();
+
     this.dataService.localSetItem('CURRENT_DAY', this.myDay).then(() => {
       return;
     });
@@ -51,19 +35,17 @@ export class Page3 {
   decreaseAppliance(event, appliance) {
     var applianceChange: number = appliance.wattsPerHour * 1;
 
-    this.myDay.appliancesConsumption[appliance.id][1] -= 1;
-    this.myDay.appliancesConsumption[appliance.id][2] -= applianceChange;
+    if(this.myDay.appliancesConsumption[appliance.id][1] != 0) {
+      this.myDay.appliancesConsumption[appliance.id][1] -= 1;
+      this.myDay.appliancesConsumption[appliance.id][2] -= applianceChange;
+      this.myDay.totalConsumedThisDay -= applianceChange;
 
-    this.myDay.totalConsumedThisDay -= applianceChange;
-    //this.totalConsumedToday = this.myDay.totalConsumedThisDay;
-    this.dataService.localSetItem('CURRENT_DAY', this.myDay).then(() => {
-      return;
-    });
+      this.myDay.refreshStatus();
 
-  }
+      this.dataService.localSetItem('CURRENT_DAY', this.myDay).then(() => {
+        return;
+      });
+    }
 
-  clearConsumption() {
-    this.totalConsumedToday = 0;
-    this.dataService.localSetItem('totalConsumedToday', this.totalConsumedToday);
   }
 }

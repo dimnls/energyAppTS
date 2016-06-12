@@ -7,13 +7,14 @@
 
 <ion-content padding class="page1">
   totalConsumedThisDay: {{ myDay.totalConsumedThisDay }}
+  <!-- <img class="statusImage" src="{{ myDay.currentStatus.image }}"  /> -->
   <ion-card>
     <ion-card-content>
     <ion-card-title>
-      {{ currentStatus.title }}
+      {{ myDay.currentStatus.title }}
     </ion-card-title>
     <p>
-      {{ currentStatus.description }}
+      {{ myDay.currentStatus.description }}
     </p>
     </ion-card-content>
     <ion-row>
@@ -26,7 +27,7 @@
     </ion-row>
   </ion-card>
   <ion-row>
-    <img class="statusImage" src="{{ currentStatus.image }}"  />
+    <img class="statusImage" src="{{ myDay.currentStatus.image }}"  />
   </ion-row>
   <ion-row>
     <button large block outline (click)="showTip()">

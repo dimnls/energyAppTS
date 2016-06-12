@@ -21,7 +21,7 @@ export class DayModel {
     this.date = this.time.toDateString();
 
     this.totalConsumedThisDay = 0;
-    this.statusId = 0;
+    this.refreshStatus();
 
     //Initialize appliancesConsumption matrix with appliances names and zeroes for consumptions
     for( let row = 0; row < this.appliances.length; row++) {
@@ -32,6 +32,7 @@ export class DayModel {
       }
       this.appliancesConsumption[row] = rowAppliance;
     }
+
 
     console.log('NEW DAY MODEL CREATED');
     console.log(this);
@@ -52,7 +53,6 @@ export class DayModel {
       this.statusId = 3;
     }
     this.currentStatus = this.statuses[this.statusId];
-    console.log(this);
   }
 
 }

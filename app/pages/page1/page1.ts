@@ -15,11 +15,6 @@ import {DayModel} from '../../models/day-model';
 export class Page1 {
   statuses: any = require('../../statuses.json');
 
-  averageConsumption: number = 200;
-
-  statusId: number = 0;
-  currentStatus: any;
-
   time: Date;
   date: string;
 
@@ -27,7 +22,7 @@ export class Page1 {
     this.time = new Date();
     this.date = this.time.toDateString();
     console.log(this.date);
-    //this.date = 'Mon Jun 13 2016'; //TODO: remove
+
     this.myDay = myDay;
 
     //Check if there a stored CURRENT_DAY that matches today's date. If yes, load it.
@@ -45,8 +40,6 @@ export class Page1 {
       }
     });
 
-    this.currentStatus  = this.statuses[this.myDay.statusId];
-
     this.refreshStatus();
 
   }
@@ -59,7 +52,6 @@ export class Page1 {
 
   refreshStatus(){
     this.myDay.refreshStatus();
-    this.currentStatus  = this.statuses[this.myDay.statusId];
   }
 
   socialShare(message: string = 'I am using Amber to keep track of my Energy consumption! Get the app at http://meetamber.online', subject: string = null, file = null, link: string = 'http://meetamber.online') {

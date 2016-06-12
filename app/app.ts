@@ -36,14 +36,7 @@ export class MyApp {
     this.dataService.localGetItem('name').then((value) => {
       this.username = value; //for sidemenu profile card
     });
-
-
-    // this.dataService.localGetItem('CURRENT_DAY').then((value) => {
-    //   this.myDay = value;
-    //   console.log(this.myDay);
-    // });
-
-
+    
     this.goToIntroOrHome();
 
   }
