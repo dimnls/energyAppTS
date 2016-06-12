@@ -25,6 +25,11 @@ export class Page1 {
 
     this.myDay = myDay;
 
+    // var loading = Loading.create({
+    //   content: 'Loading your data'
+    // });
+    // this.nav.present(loading);
+
     //Check if there a stored CURRENT_DAY that matches today's date. If yes, load it.
     this.dataService.localGetItem('CURRENT_DAY').then((value) => {
       if( value != null ) {

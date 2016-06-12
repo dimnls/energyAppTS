@@ -35,8 +35,9 @@
   {{date}}
   <button full (click)="clearConsumption()">Clear All</button> -->
   <h1> Total W today: {{ myDay.totalConsumedThisDay }}</h1>
+  <ion-searchbar [(ngModel)]="searchQuery" (input)="getItems($event)" [hideCancelButton]="shouldNotHideCancel"></ion-searchbar>
   <ion-list class="appliances-list">
-      <ion-item *ngFor="let appliance of appliances">
+      <ion-item *ngFor="let appliance of appliancesToShow">
         <ion-row>
           <ion-col>
             <ion-row>

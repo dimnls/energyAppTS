@@ -11,10 +11,37 @@ export class Page3 {
   date: string;
 
   appliances: any = require('../../appliances.json');
-
+  appliancesToShow: any;
+  searchQuery: string;
+  
   constructor(public nav: NavController, public dataService: DataService, public navParams: NavParams, public myDay: DayModel) {
+    this.searchQuery = '';
     this.myDay = myDay;
+    this.initializeAppliancesToShow();
+  }
 
+  initializeAppliancesToShow() {
+    this.appliancesToShow = this.appliances;
+  }
+
+  getItems(searchbar) {
+    // Reset items back to all of the items
+    this.initializeAppliancesToShow();
+
+    // set q to the value of the searchbar
+    var q = searchbar.value;
+
+    // if the value is an empty string don't filter the items
+    if (q.trim() == '') {
+      return;
+    }
+
+    this.appliancesToShow = this.appliancesToShow.filter((v) => {
+      if (v.title.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+        return true;
+      }
+      return false;
+    })
   }
 
   increaseAppliance(event, appliance) {

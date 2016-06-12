@@ -6,8 +6,13 @@
 </ion-navbar>
 
 <ion-content padding class="page1">
-  totalConsumedThisDay: {{ myDay.totalConsumedThisDay }}
-  <!-- <img class="statusImage" src="{{ myDay.currentStatus.image }}"  /> -->
+
+  <ion-card>
+    <p>
+      Your total consumption today: {{ myDay.totalConsumedThisDay }}
+    </p>
+  </ion-card>
+
   <ion-card>
     <ion-card-content>
     <ion-card-title>
