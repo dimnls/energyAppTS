@@ -7,12 +7,12 @@ import {IntroPage} from './pages/intro/intro';
 import {DataService} from './providers/data/data';
 import {UserInfoPage} from './pages/user-info/user-info'; //REMEMBER to import all pages needed for the menu
 import {Page1} from './pages/page1/page1';
-
+import {DayModel} from './models/day-model';
 
 @App({
   // template: '<ion-nav [root]="rootPage"></ion-nav>',
   templateUrl: 'build/app.html', //FOR MENU
-  providers: [DataService],
+  providers: [DataService, DayModel],
   config: {
     tabbarPlacement: 'bottom'
   } // http://ionicframework.com/docs/v2/api/config/Config/
@@ -26,7 +26,7 @@ export class MyApp {
   //UserInfo vars
   username: string;
 
-  constructor(private platform: Platform, private menu: MenuController, private dataService: DataService) {
+  constructor(private platform: Platform, private menu: MenuController, private dataService: DataService, private myDay: DayModel) {
 
     this.initializeApp();
     this.menuPages = [
@@ -36,6 +36,13 @@ export class MyApp {
     this.dataService.localGetItem('name').then((value) => {
       this.username = value; //for sidemenu profile card
     });
+
+
+    // this.dataService.localGetItem('CURRENT_DAY').then((value) => {
+    //   this.myDay = value;
+    //   console.log(this.myDay);
+    // });
+
 
     this.goToIntroOrHome();
 

@@ -13,20 +13,10 @@ export class Page3 {
   appliances: any = require('../../appliances.json');
   totalConsumedToday: number;
 
-  myDay: DayModel;
-  myUpdate() {};
-  loadedDay: DayModel;
+  //myDay: DayModel;
 
-  constructor(public nav: NavController, public dataService: DataService, public navParams: NavParams) {
-
-    // this.dataService.localGetItem('today').then((value) => {
-    //   this.today = value;
-    //   this.totalConsumedToday = this.today.totalConsumedThisDay;
-    // });
-
-    this.myDay = this.navParams.get('day');
-    this.myUpdate = this.navParams.get('update');
-    this.loadedDay = this.navParams.get('loaded');
+  constructor(public nav: NavController, public dataService: DataService, public navParams: NavParams, public myDay: DayModel) {
+    this.myDay = myDay;
 
   }
 

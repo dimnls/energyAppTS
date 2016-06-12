@@ -19,56 +19,47 @@ export class TabsPage {
   lastDate: string;
   tempDate: string = 'Tue Jun 07 2016';
 
-  public myDay: DayModel;
-  loadedDay: DayModel;
+  //myDay: DayModel;
 
-  constructor(public nav: NavController, public navParams: NavParams, public dataService: DataService) {
+  constructor(public nav: NavController, public navParams: NavParams, public dataService: DataService, public myDay: DayModel) {
     this.nav = nav;
+    this.myDay = myDay;
+
 
     this.time = new Date();
     setInterval(() => this.time = new Date(), 1000);
     this.date = this.time.toDateString();
 
 
-    //Create new day model
-    // this.dataService.localGetItem('CURRENT_DAY').then((value) => {
-    //   this.myDay = new DayModel(this.date);
-    //   this.dataService.localSetItem('CURRENT_DAY', this.myDay);
+    //Create new model
+    //this.myDay = new DayModel('CURRENT_DATE');
+    //this.dataService.localSetItem('CURRENT_DAY', this.myDay);
+
+    // this.myDay = this.dataService.localGetItem('CURRENT_DAY').then((value) => {
+    //   this.myDay = value;
+    //   console.log(this.myDay);
     // });
-
-
-    //this.myDay = new DayModel('CURRENT_DAY');
-    //this.dataService.localSetItem('DAY 1', this.myDay);
-
-    this.myDay = this.dataService.localGetItem('CURRENT_DAY').then((value) => {
-      this.myDay = value;
-      console.log(this.myDay);
-    });
-    console.log('MY DAY:');
-    console.log(this.myDay);
+    // console.log('MY DAY:');
+    // console.log(this.myDay);
     //this.dateCheck();
 
   }
 
-  dateCheck() {
-    if (this.myDay == null ) {
-      this.myDay = new DayModel(this.date);
-      this.dataService.localSetItem('CURRENT_DAY', this.myDay);
-      console.log('NEW DAY CREATED, FIRST TIME');
-    } else if (this.date != this.myDay.date) {
-      this.dataService.localSetItem('CURRENT_DAY', this.myDay).then(() => {
-        this.myDay = new DayModel(this.date);
-        console.log('PREVIOUS DAY SAVED, NEW DAY CREATED');
-        return;
-      });
-    } else {
-      console.log('DATES EQUAL');
-    }
-  }
-
-  myUpdate () {
-    this.myDay.totalConsumedThisDay += 10;
-  }
+  // dateCheck() {
+  //   if (this.myDay == null ) {
+  //     this.myDay = new DayModel(this.date);
+  //     this.dataService.localSetItem('CURRENT_DAY', this.myDay);
+  //     console.log('NEW DAY CREATED, FIRST TIME');
+  //   } else if (this.date != this.myDay.date) {
+  //     this.dataService.localSetItem('CURRENT_DAY', this.myDay).then(() => {
+  //       this.myDay = new DayModel(this.date);
+  //       console.log('PREVIOUS DAY SAVED, NEW DAY CREATED');
+  //       return;
+  //     });
+  //   } else {
+  //     console.log('DATES EQUAL');
+  //   }
+  // }
 
 
 

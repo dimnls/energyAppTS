@@ -14,55 +14,41 @@ import {DayModel} from '../../models/day-model';
 })
 export class Page1 {
   statuses: any = require('../../statuses.json');
-  //
-  totalConsumedToday: number;
+
   averageConsumption: number = 200;
-  //
-  statusId: number = 4;
+
+  statusId: number = 0;
   currentStatus: any;
 
   time: Date;
   date: string;
-  lastDate: string;
-  tempDate: string = 'Tue Jun 07 2016';
 
-  myDay: DayModel;
-  //myUpdate() {};
-  loadedDay: DayModel;
+  constructor(public nav: NavController, public platform: Platform, public dataService: DataService, public navParams: NavParams, public myDay: DayModel) {
+    this.time = new Date();
+    this.date = this.time.toDateString();
+    console.log(this.date);
+    //this.date = 'Mon Jun 13 2016'; //TODO: remove
+    this.myDay = myDay;
 
-  constructor(public nav: NavController, public platform: Platform, public dataService: DataService, public navParams: NavParams) {
-
-    this.myDay = this.navParams.get('day');
-    //this.loading();
-
-    this.currentStatus  = this.statuses[this.statusId];
-    this.dateCheck(); //refresh status through dateCheck()
-
-  }
-
-  loading() {
-    let loading = Loading.create({
-      content: 'Loading status'
+    //Check if there a stored CURRENT_DAY that matches today's date. If yes, load it.
+    this.dataService.localGetItem('CURRENT_DAY').then((value) => {
+      if( value != null ) {
+        if( this.date == value.date ) {
+          this.myDay.totalConsumedThisDay = value.totalConsumedThisDay;
+          this.myDay.appliancesConsumption = value.appliancesConsumption;
+          this.myDay.statusId = value.statusId;
+          this.myDay.currentStatus = value.currentStatus;
+        } else {
+          this.dataService.localSetItem(value.date, value);
+          this.dataService.localSetItem('CURRENT_DAY', this.myDay);
+        }
+      }
     });
 
-    loading.onDismiss( data => {
-      this.myDay = this.navParams.get('day');
-      console.log('MY DAY CHANGED AFTER LOADING');
-      console.log(this.myDay);
-    });
+    this.currentStatus  = this.statuses[this.myDay.statusId];
 
-    this.nav.present(loading);
+    this.refreshStatus();
 
-    setTimeout(() => {
-      loading.dismiss();
-    }, 1000);
-
-
-  }
-
-  myUpdate () {
-    this.myDay = this.navParams.get('day');
-    console.log(this.myDay);
   }
 
   showTip() {
@@ -71,72 +57,9 @@ export class Page1 {
     });
   }
 
-  // refreshStatus() {
-  //   this.dataService.localGetItem('today').then((value) => {
-  //     this.today = value;
-  //     console.log('loaded today = ' + this.today); //TODO: remove
-  //     this.totalConsumedToday = this.today.totalConsumedThisDay;
-  //     console.log('loaded today totalConsumedThisDay = ' + this.totalConsumedToday); //TODO: remove
-  //     if(this.totalConsumedToday == null || value == 0) {
-  //       this.statusId = 4;
-  //     } else if(this.totalConsumedToday >= (this.averageConsumption + 50)) {
-  //       this.statusId = 0;
-  //     } else if(this.totalConsumedToday > (this.averageConsumption)) {
-  //       this.statusId = 1;
-  //     } else if(this.totalConsumedToday <= (this.averageConsumption - 50)) {
-  //       this.statusId = 3;
-  //     } else if (this.totalConsumedToday <= (this.averageConsumption)) {
-  //       this.statusId = 2;
-  //     }
-  //
-  //     this.currentStatus = this.statuses[this.statusId];
-  //
-  //   });
-  // }
-
-  refreshStatus() {
-    let consumption = this.myDay.totalConsumedThisDay;
-
-    if(consumption == null || consumption == 0) {
-      this.statusId = 4;
-    } else if(consumption >= (this.averageConsumption + 50)) {
-      this.statusId = 0;
-    } else if(consumption > (this.averageConsumption)) {
-      this.statusId = 1;
-    } else if(consumption <= (this.averageConsumption - 50)) {
-      this.statusId = 3;
-    } else if (consumption <= (this.averageConsumption)) {
-      this.statusId = 2;
-    }
-
-    this.currentStatus = this.statuses[this.statusId];
-
-  }
-
-
-
-  dateCheck() {
-    this.time = new Date();
-    setInterval(() => this.time = new Date(), 1000);
-    //get current date
-    this.date = this.time.toDateString();
-    //load last saved date
-    this.dataService.localGetItem('lastDate').then((value) => {
-      this.lastDate = value;
-      //this.lastDate = this.tempDate; //TODO remove
-      //console.log('last saved date: ' + this.lastDate); //TDOO remove
-
-      if( this.date != this.lastDate ) {
-        //console.log('dates not equal');
-        this.dataService.localSetItem('lastDate', this.date);
-        this.dataService.localSetItem('totalConsumedToday', 0).then(() => {
-          this.refreshStatus();
-        });
-
-      } else { //last saved date is today, simply refresh status
-        this.refreshStatus();
-      }
-    });
+  refreshStatus(){
+    this.myDay.refreshStatus();
+    this.currentStatus  = this.statuses[this.myDay.statusId];
   }
 
   socialShare(message: string = 'I am using Amber to keep track of my Energy consumption! Get the app at http://meetamber.online', subject: string = null, file = null, link: string = 'http://meetamber.online') {
