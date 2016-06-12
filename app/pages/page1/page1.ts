@@ -14,10 +14,10 @@ import {DayModel} from '../../models/day-model';
 })
 export class Page1 {
   statuses: any = require('../../statuses.json');
-
+  //
   totalConsumedToday: number;
   averageConsumption: number = 200;
-
+  //
   statusId: number = 4;
   currentStatus: any;
 
@@ -26,24 +26,43 @@ export class Page1 {
   lastDate: string;
   tempDate: string = 'Tue Jun 07 2016';
 
-  today: DayModel;
-
-  myDay: DayModel; //TODO: remove
-  mySave() {};
+  myDay: DayModel;
+  //myUpdate() {};
+  loadedDay: DayModel;
 
   constructor(public nav: NavController, public platform: Platform, public dataService: DataService, public navParams: NavParams) {
+
+    this.myDay = this.navParams.get('day');
+    //this.loading();
 
     this.currentStatus  = this.statuses[this.statusId];
     this.dateCheck(); //refresh status through dateCheck()
 
-    //New Day
-    this.today = new DayModel(this.date);
-    this.dataService.localSetItem('today', this.today);
+  }
 
-    //model test TODO: remove
+  loading() {
+    let loading = Loading.create({
+      content: 'Loading status'
+    });
+
+    loading.onDismiss( data => {
+      this.myDay = this.navParams.get('day');
+      console.log('MY DAY CHANGED AFTER LOADING');
+      console.log(this.myDay);
+    });
+
+    this.nav.present(loading);
+
+    setTimeout(() => {
+      loading.dismiss();
+    }, 1000);
+
+
+  }
+
+  myUpdate () {
     this.myDay = this.navParams.get('day');
-    this.mySave = this.navParams.get('save');
-
+    console.log(this.myDay);
   }
 
   showTip() {
@@ -52,42 +71,21 @@ export class Page1 {
     });
   }
 
-  refreshStatus() {
-    this.dataService.localGetItem('today').then((value) => {
-      this.today = value;
-      console.log('loaded today = ' + this.today); //TODO: remove
-      this.totalConsumedToday = this.today.totalConsumedThisDay;
-      console.log('loaded today totalConsumedThisDay = ' + this.totalConsumedToday); //TODO: remove
-      if(this.totalConsumedToday == null || value == 0) {
-        this.statusId = 4;
-      } else if(this.totalConsumedToday >= (this.averageConsumption + 50)) {
-        this.statusId = 0;
-      } else if(this.totalConsumedToday > (this.averageConsumption)) {
-        this.statusId = 1;
-      } else if(this.totalConsumedToday <= (this.averageConsumption - 50)) {
-        this.statusId = 3;
-      } else if (this.totalConsumedToday <= (this.averageConsumption)) {
-        this.statusId = 2;
-      }
-
-      this.currentStatus = this.statuses[this.statusId];
-
-    });
-  }
-
   // refreshStatus() {
-  //   this.dataService.localGetItem('totalConsumedToday').then((value) => {
-  //     this.totalConsumedToday = value;
-  //
-  //     if(value == null || value == 0) {
+  //   this.dataService.localGetItem('today').then((value) => {
+  //     this.today = value;
+  //     console.log('loaded today = ' + this.today); //TODO: remove
+  //     this.totalConsumedToday = this.today.totalConsumedThisDay;
+  //     console.log('loaded today totalConsumedThisDay = ' + this.totalConsumedToday); //TODO: remove
+  //     if(this.totalConsumedToday == null || value == 0) {
   //       this.statusId = 4;
-  //     } else if(value >= (this.averageConsumption + 50)) {
+  //     } else if(this.totalConsumedToday >= (this.averageConsumption + 50)) {
   //       this.statusId = 0;
-  //     } else if(value > (this.averageConsumption)) {
+  //     } else if(this.totalConsumedToday > (this.averageConsumption)) {
   //       this.statusId = 1;
-  //     } else if(value <= (this.averageConsumption - 50)) {
+  //     } else if(this.totalConsumedToday <= (this.averageConsumption - 50)) {
   //       this.statusId = 3;
-  //     } else if (value <= (this.averageConsumption)) {
+  //     } else if (this.totalConsumedToday <= (this.averageConsumption)) {
   //       this.statusId = 2;
   //     }
   //
@@ -95,6 +93,27 @@ export class Page1 {
   //
   //   });
   // }
+
+  refreshStatus() {
+    let consumption = this.myDay.totalConsumedThisDay;
+
+    if(consumption == null || consumption == 0) {
+      this.statusId = 4;
+    } else if(consumption >= (this.averageConsumption + 50)) {
+      this.statusId = 0;
+    } else if(consumption > (this.averageConsumption)) {
+      this.statusId = 1;
+    } else if(consumption <= (this.averageConsumption - 50)) {
+      this.statusId = 3;
+    } else if (consumption <= (this.averageConsumption)) {
+      this.statusId = 2;
+    }
+
+    this.currentStatus = this.statuses[this.statusId];
+
+  }
+
+
 
   dateCheck() {
     this.time = new Date();
@@ -105,10 +124,10 @@ export class Page1 {
     this.dataService.localGetItem('lastDate').then((value) => {
       this.lastDate = value;
       //this.lastDate = this.tempDate; //TODO remove
-      console.log('last saved date: ' + this.lastDate); //TDOO remove
+      //console.log('last saved date: ' + this.lastDate); //TDOO remove
 
       if( this.date != this.lastDate ) {
-        console.log('dates not equal');
+        //console.log('dates not equal');
         this.dataService.localSetItem('lastDate', this.date);
         this.dataService.localSetItem('totalConsumedToday', 0).then(() => {
           this.refreshStatus();

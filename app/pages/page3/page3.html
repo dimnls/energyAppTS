@@ -34,8 +34,8 @@
   </ion-list>
   {{date}}
   <button full (click)="clearConsumption()">Clear All</button> -->
-  <button (click)="myChangeDate()">change date</button>
-  <h1> Total W today: {{ totalConsumedToday }}</h1>
+  <h1> Total W today: {{ myDay.totalConsumedThisDay }}</h1>
+  <button (click)="myUpdate()">+10</button>
   <ion-list class="appliances-list">
       <ion-item *ngFor="let appliance of appliances">
         <ion-row>

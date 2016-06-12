@@ -6,8 +6,9 @@
 </ion-navbar>
 
 <ion-content padding class="page1">
-  {{ myDay.date }}
-  <button (click)="mySave()">model save</button>
+  totalConsumedThisDay: {{ myDay.totalConsumedThisDay }}
+  <button (click)="myUpdate()">+10</button>
+
   <ion-card>
     <ion-card-content>
     <ion-card-title>

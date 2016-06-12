@@ -13,87 +13,63 @@ export class Page3 {
   appliances: any = require('../../appliances.json');
   totalConsumedToday: number;
 
-  today: DayModel;
-
-  myDay: DayModel; //TODO: remove
-  mySave() {};
-  myChangeDate() {};
+  myDay: DayModel;
+  myUpdate() {};
+  loadedDay: DayModel;
 
   constructor(public nav: NavController, public dataService: DataService, public navParams: NavParams) {
 
+    // this.dataService.localGetItem('today').then((value) => {
+    //   this.today = value;
+    //   this.totalConsumedToday = this.today.totalConsumedThisDay;
+    // });
 
-    //Set up date display
-    this.time = new Date();
-    setInterval(() => this.time = new Date(), 1000);
-    this.date = this.time.toDateString();
-
-    this.dataService.localGetItem('today').then((value) => {
-      this.today = value;
-      this.totalConsumedToday = this.today.totalConsumedThisDay;
-    });
-
-    //model test TODO: remove
     this.myDay = this.navParams.get('day');
-    this.mySave = this.navParams.get('save');
-    this.myChangeDate = this.navParams.get('change');
+    this.myUpdate = this.navParams.get('update');
+    this.loadedDay = this.navParams.get('loaded');
 
   }
-  // applianceTapped(event, appliance) {
-  //   let prompt = Alert.create({
-  //     title: appliance.title + ' usage',
-  //     message: 'Enter the time you used the appliance for',
-  //     inputs: [
-  //       {
-  //         name: 'time',
-  //         placeholder: 'Time (hrs)',
-  //         type: 'number'
-  //       },
-  //     ],
-  //     buttons: [
-  //       {
-  //         text: 'Cancel',
-  //         handler: data => {
-  //           console.log('Cancel clicked');
-  //         }
-  //       },
-  //       {
-  //         text: 'Save',
-  //         handler: data => {
-  //           console.log('Save clicked. Value (hrs x W) = ' + (data.time*appliance.wattsPerHour) );
-  //           this.saveApplianceW( data.time * appliance.wattsPerHour );
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   this.nav.present(prompt);
-  // }
 
   // increaseAppliance(event, appliance) {
-  //   this.totalConsumedToday += (appliance.wattsPerHour * 1);
-  //   this.dataService.localSetItem('totalConsumedToday', this.totalConsumedToday).then(() => {
+  //   var applianceChange: number = appliance.wattsPerHour * 1;
+  //
+  //   this.today.appliancesConsumption[appliance.id][1] += 1;
+  //   this.today.appliancesConsumption[appliance.id][2] += applianceChange;
+  //
+  //   this.today.totalConsumedThisDay += applianceChange;
+  //   this.totalConsumedToday = this.today.totalConsumedThisDay;
+  //   this.dataService.localSetItem('today', this.today).then(() => {
   //     return;
   //   });
+  //
   // }
 
   increaseAppliance(event, appliance) {
     var applianceChange: number = appliance.wattsPerHour * 1;
 
-    this.today.appliancesConsumption[appliance.id][1] += 1;
-    this.today.appliancesConsumption[appliance.id][2] += applianceChange;
+    this.myDay.appliancesConsumption[appliance.id][1] += 1;
+    this.myDay.appliancesConsumption[appliance.id][2] += applianceChange;
 
-    this.today.totalConsumedThisDay += applianceChange;
-    this.totalConsumedToday = this.today.totalConsumedThisDay;
-    this.dataService.localSetItem('today', this.today).then(() => {
+    this.myDay.totalConsumedThisDay += applianceChange;
+    //this.totalConsumedToday = this.myDay.totalConsumedThisDay;
+    this.dataService.localSetItem('CURRENT_DAY', this.myDay).then(() => {
       return;
     });
 
   }
 
   decreaseAppliance(event, appliance) {
-    this.totalConsumedToday -= (appliance.wattsPerHour * 1);
-    this.dataService.localSetItem('totalConsumedToday', this.totalConsumedToday).then(() => {
+    var applianceChange: number = appliance.wattsPerHour * 1;
+
+    this.myDay.appliancesConsumption[appliance.id][1] -= 1;
+    this.myDay.appliancesConsumption[appliance.id][2] -= applianceChange;
+
+    this.myDay.totalConsumedThisDay -= applianceChange;
+    //this.totalConsumedToday = this.myDay.totalConsumedThisDay;
+    this.dataService.localSetItem('CURRENT_DAY', this.myDay).then(() => {
       return;
     });
+
   }
 
   clearConsumption() {

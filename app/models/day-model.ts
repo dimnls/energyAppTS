@@ -5,6 +5,8 @@ export class DayModel {
   totalConsumedThisDay: number;
   appliancesConsumption = [];
 
+  status: number = 9999;
+
   constructor(date: string) {
     this.date = date;
     this.totalConsumedThisDay = 0;
