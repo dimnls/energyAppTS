@@ -1,0 +1,29 @@
+.sidemenu {
+  .sidemenu-top {
+    position: relative;
+    text-align: left;
+    height: 25%;
+
+  }
+
+  .user {
+    position: absolute;
+    top: 65%;
+    left: 5%;
+    font-size: 2em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .subtitle {
+    font-size: 1.0em;
+    position: absolute;
+    top: 83%;
+    left: 6%;
+    width: 100%;
+    color: #fff;
+  }
+
+
+}

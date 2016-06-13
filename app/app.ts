@@ -21,7 +21,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = TabsPage;
-  menuPages: Array<{title: string, component: any}>;
+  menuPages: Array<{title: string, component: any, icon: string}>;
   local: LocalStorage;
   //UserInfo vars
   username: string;
@@ -30,8 +30,8 @@ export class MyApp {
 
     this.initializeApp();
     this.menuPages = [
-      {title: 'Edit user info', component: UserInfoPage},
-      {title: 'Watch intro', component: IntroPage}
+      {title: 'Edit user info', component: UserInfoPage, icon: 'person'},
+      {title: 'Watch intro', component: IntroPage, icon: 'desktop'}
     ];
     this.dataService.localGetItem('name').then((value) => {
       this.username = value; //for sidemenu profile card

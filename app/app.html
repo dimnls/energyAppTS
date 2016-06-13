@@ -1,28 +1,35 @@
 <ion-menu [content]="content">
 
-  <ion-toolbar>
+  <!-- <ion-toolbar>
     <ion-title>Options</ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
 
-  <ion-content>
 
-    <ion-card>
-      <ion-item>
-        <ion-avatar item-left>
-          <img src="images/user_icon.png">
-        </ion-avatar>
-        <h2>{{username}}</h2>
-        <p>In vino veritas.</p>
-      </ion-item>
+  <!-- <ion-card>
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="images/user_icon.png">
+      </ion-avatar>
+      <h2>{{username}}</h2>
+      <p>In vino veritas.</p>
+    </ion-item>
 
-      <ion-card-content>
-        <!-- <p>Hello, Dionysos! How are you doing?</p> -->
-      </ion-card-content>
-    </ion-card>
+    <ion-card-content>
+      This is some card content right here.
+    </ion-card-content>
+  </ion-card> -->
+  <ion-content class="sidemenu">
+
+    <div class="sidemenu-top">
+      <img src="images/Windmill_3_hires.jpg"  />
+      <div class="user"> {{username}} </div>
+      <div class="subtitle"> Settings page </div>
+    </div>
+
 
     <ion-list>
       <button ion-item *ngFor="let p of menuPages" (click)="openMenuPage(p)">
-        {{p.title}}
+        <ion-icon name="{{p.icon}}" item-left></ion-icon>{{p.title}}
       </button>
     </ion-list>
 

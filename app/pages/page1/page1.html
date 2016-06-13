@@ -1,18 +1,13 @@
-<ion-navbar *navbar>
+<ion-navbar *navbar primary>
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>Energy App</ion-title>
+  <ion-title>Overview</ion-title>
 </ion-navbar>
 
-<ion-content padding class="page1">
+<ion-content  class="page1">
 
-  <ion-card>
-    <p>
-      Your total consumption today: {{ myDay.totalConsumedThisDay }}
-    </p>
-  </ion-card>
-
+  <!-- Normal status card, out for experiment. Works ok. -->
   <ion-card>
     <ion-card-content>
     <ion-card-title>
@@ -21,6 +16,7 @@
     <p>
       {{ myDay.currentStatus.description }}
     </p>
+    <h4 class="total-today">Total Consumption Today: {{ myDay.totalConsumedThisDay }}</h4>
     </ion-card-content>
     <ion-row>
       <ion-item>
@@ -31,19 +27,44 @@
       </ion-item>
     </ion-row>
   </ion-card>
+
+
+  <!-- test TODO:remove -->
+  <!-- <ion-card class="status-card">
+    <img class="status-image" src="{{ myDay.currentStatus.image }}"  />
+    <div class="status-text">
+      <h1 class="status-title">{{ myDay.currentStatus.title }}</h1>
+      <p class="status-subtitle">{{ myDay.currentStatus.description }}</p>
+      <h4 class="total-today">Total Consumption Today: {{ myDay.totalConsumedThisDay }}</h4>
+    </div>
+    <ion-row>
+      <ion-item>
+        <button primary clear item-right (click)="refreshStatus()">
+          <div>REFRESH</div>
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-row>
+  </ion-card> -->
+
   <ion-row>
     <img class="statusImage" src="{{ myDay.currentStatus.image }}"  />
   </ion-row>
-  <ion-row>
-    <button large block outline (click)="showTip()">
+  <ion-row >
+    <button large block outline (click)="showTip()" class="bottom-button">
       <ion-icon name="book"></ion-icon>
       Get a new tip!
     </button>
   </ion-row>
 
   <!-- Social Share -->
-  <button full (click)="socialShare()">Share your energy consumption</button>
-  <button danger full (click)="socialShare()">Spread the word!</button>
+  <ion-row>
+    <button block (click)="socialShare()" class="bottom-button">Share your energy consumption</button>
+  </ion-row>
+  <ion-row>
+    <button danger block (click)="socialShare()" class="bottom-button">Spread the word!</button>
+  </ion-row>
+
 
 
 </ion-content>

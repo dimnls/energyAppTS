@@ -1,11 +1,15 @@
-<ion-navbar *navbar>
+<ion-navbar *navbar primary>
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>Energy App</ion-title>
+  <ion-title>Appliances</ion-title>
 </ion-navbar>
 
-<ion-content padding class="page3">
+<ion-toolbar primary>
+  <ion-searchbar [(ngModel)]="searchQuery" (input)="getItems($event)" [hideCancelButton]="shouldNotHideCancel"></ion-searchbar>
+</ion-toolbar>
+
+<ion-content  class="page3">
   <!-- <h1>Consume Energy</h1>
   <p>
     The current date is: <b>{{date}}</b>
@@ -35,11 +39,10 @@
   {{date}}
   <button full (click)="clearConsumption()">Clear All</button> -->
   <h1> Total W today: {{ myDay.totalConsumedThisDay }}</h1>
-  <ion-searchbar [(ngModel)]="searchQuery" (input)="getItems($event)" [hideCancelButton]="shouldNotHideCancel"></ion-searchbar>
   <ion-list class="appliances-list">
       <ion-item *ngFor="let appliance of appliancesToShow">
         <ion-row>
-          <ion-col>
+          <ion-col width-33>
             <ion-row>
               <h2>{{ appliance.title }}</h2>
             </ion-row>
@@ -52,7 +55,7 @@
               </p>
             </ion-row>
           </ion-col>
-          <ion-col>
+          <ion-col width-33>
             <ion-row>
               <h3>USAGE TIME: {{ myDay.appliancesConsumption[appliance.id][1] }}</h3>
             </ion-row>
@@ -60,12 +63,12 @@
               <h3>USAGE WATTS: {{ myDay.appliancesConsumption[appliance.id][2] }}</h3>
             </ion-row>
           </ion-col>
-          <ion-col>
+          <ion-col width-33>
             <ion-row>
-              <button small danger (click)="increaseAppliance($event, appliance)"><ion-icon name="add"></ion-icon></button>
+              <button round large danger (click)="increaseAppliance($event, appliance)"><ion-icon name="add"></ion-icon></button>
             </ion-row>
             <ion-row>
-              <button small (click)="decreaseAppliance($event, appliance)"><ion-icon name="remove"></ion-icon></button>
+              <button round large (click)="decreaseAppliance($event, appliance)"><ion-icon name="remove"></ion-icon></button>
             </ion-row>
           </ion-col>
         </ion-row>
