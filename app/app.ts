@@ -10,7 +10,7 @@ import {Page1} from './pages/page1/page1';
 import {DayModel} from './models/day-model';
 
 import {DaysLogsPage} from './pages/days-logs/days-logs';
-
+import '../node_modules/chart.js/dist/Chart.bundle.min.js';
 @App({
   // template: '<ion-nav [root]="rootPage"></ion-nav>',
   templateUrl: 'build/app.html', //FOR MENU
