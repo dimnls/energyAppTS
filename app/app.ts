@@ -33,8 +33,8 @@ export class MyApp {
 
   constructor(private platform: Platform, private menu: MenuController, private dataService: DataService, private myDay: DayModel) {
 
-    this.initializeApp();
-  
+    this.initializeApp();//
+
     this.menuPages = [
       {title: 'Edit user info', component: UserInfoPage, icon: 'person'},
       {title: 'Watch intro', component: IntroPage, icon: 'desktop'},
