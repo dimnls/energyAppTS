@@ -1,7 +1,18 @@
 .days-logs {
+  .day-date {
+    text-align: left;
+    font-size: 1.3em;
 
+  }
+  .day-value {
+    //text-align: right;
+    float: right;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
 }
 
 .chart {
   display: block;
+  height: 100%;
 }

@@ -10,7 +10,8 @@ import {Page1} from './pages/page1/page1';
 import {DayModel} from './models/day-model';
 
 import {DaysLogsPage} from './pages/days-logs/days-logs';
-import '../node_modules/chart.js/dist/Chart.bundle.min.js';
+import '../node_modules/chart.js/dist/Chart.bundle.min.js'; //NOTE: IMPORTANT TO USE THIS HERE! DO NO REMOVE
+
 @App({
   // template: '<ion-nav [root]="rootPage"></ion-nav>',
   templateUrl: 'build/app.html', //FOR MENU
@@ -38,7 +39,7 @@ export class MyApp {
     this.menuPages = [
       {title: 'Edit user info', component: UserInfoPage, icon: 'person'},
       {title: 'Watch intro', component: IntroPage, icon: 'desktop'},
-      {title: 'Consumption logs', component: DaysLogsPage, icon: 'clipboard'}
+      {title: 'Energy logs', component: DaysLogsPage, icon: 'clipboard'}
     ];
 
 
