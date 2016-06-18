@@ -8,7 +8,7 @@ import { FORM_PROVIDERS } from '@angular/common';
 
 /*
   Generated class for the UserInfoPage page.
-
+  
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */

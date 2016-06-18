@@ -1,5 +1,10 @@
-import {Page, NavController} from 'ionic-angular';
+import {Page, NavController, Platform, Alert} from 'ionic-angular';
 import {Http} from '@angular/http';
+import {Device} from 'ionic-native';
+import {ViewChild} from '@angular/core';
+import {FormBuilder, ControlGroup, Validators} from '@angular/common';
+import {DataService} from '../../providers/data/data';
+
 
 /*
   Generated class for the SurveyPage page.
@@ -11,28 +16,98 @@ import {Http} from '@angular/http';
   templateUrl: 'build/pages/survey/survey.html',
 })
 export class SurveyPage {
-  data = {
-    username: '',
-    response: ''
-  }
-  constructor(public nav: NavController, public http: Http) {
+  submittedForm: boolean = false;
+  dataToSend: any;
+
+  response: string;
+  uuid: string;
+
+  theForm: ControlGroup;
+  qs1Changed: boolean = false;
+  qs2Changed: boolean = false;
+
+  constructor(public platform: Platform, public nav: NavController, public http: Http, private formBuilder: FormBuilder, public dataService: DataService) {
     this.http = http;
+    this.dataToSend = {};
+    this.dataService = dataService;
+
+    this.platform.ready().then(() => {
+      this.uuid = Device.device.uuid;
+      this.dataService.localGetItem('submittedForm').then((value) => {
+        if(value) {
+          this.submittedForm = true;
+        }
+      });
+    });
+
+    this.theForm = formBuilder.group({
+        qs1: ['', Validators.required],
+        qs2: ['', Validators.required]
+    });
+
+
   }
 
-  submit() {
+  save () {
+    if(!this.theForm.valid){
+      let alert = Alert.create({
+        title: 'Invalid form.',
+        subTitle: 'Please answer all the questions.',
+        buttons: ['OK']
+      });
+      this.nav.present(alert);
+      console.log('Invalid form');
+    } else {
+      console.log('Valid form');
+      let alert = Alert.create({
+        title: 'Ready to send',
+        subTitle: 'You are about to send your answers to the server.',
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: alertData => {
+              console.log('Cancel server sending.');
+            }
+          },
+          {
+            text: 'OK',
+            handler: alertData => {
+              this.dataToSend.uuid = this.uuid;
+              var time = new Date();
+              this.dataToSend.timestamp = time;
+              this.dataToSend.form = this.theForm.value;
+              console.log(this.dataToSend);
+              var data = JSON.stringify(this.dataToSend);
+              console.log(data);
+              this.submit(data);
+            }
+          }
+        ]
+      });
+      this.nav.present(alert);
+    }
+
+  }
+
+  submit(data) {
+    var link = 'http://83.212.99.80/Amber/Ionic_api.php';
+    this.http.post(link, data)
+    .subscribe(data => {
+     this.response = data._body; //NOTE: Ignore error message, it is correct and works.
+     console.log(this.response);
+     this.submittedForm = true;
+     this.dataService.localSetItem('submittedForm', true);
+     let alert = Alert.create({
+       title: 'Answers sent successfully!',
+       subTitle: 'Thank you for contributing your data!',
+       buttons: ['OK']
+     });
+     this.nav.present(alert);
 
 
-    var link = 'http://83.212.99.80/Ionic_api.php';
-        var data = JSON.stringify({username: this.data.username});
-
-        this.http.post(link, data)
-        .subscribe(data => {
-         this.data.response = data._body;
-        }, error => {
-            console.log("Oooops!");
-        });
-
-
+    }, error => {
+        console.log("Oooops!");
+    });
   }
 
 }

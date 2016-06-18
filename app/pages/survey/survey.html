@@ -9,20 +9,80 @@
 </ion-navbar>
 
 <ion-content padding class="survey">
-    <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text" name="username" [(ngModel)]="data.username"></ion-input>
-    </ion-item>
+  <p *ngIf="submittedForm" style="color: green; text-align: center;">You have already submitted the survey once.</p>
 
+  <!-- <ion-item>
+    <ion-label floating>Username</ion-label>
+    <ion-input type="text" name="username" [(ngModel)]="data.username"></ion-input>
+  </ion-item>
   <button round block (click)="submit()">Submit to server</button>
-
   <ion-card>
     <ion-card-header>
       Response
     </ion-card-header>
     <ion-card-content>
-      <b>{{ data.response }}</b>
+      <b>{{ response }}</b>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
+
+  <!-- FORM HERE -->
+  <form [ngFormModel]="theForm">
+
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>
+          Is this Question 1 or is it some different question that we will have to talk about right now?
+        </ion-card-title>
+        <ion-list radio-group #qs1 ngControl="qs1" no-lines>
+          <ion-item>
+            <ion-label>Answer 1</ion-label>
+            <ion-radio value="ans1"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Answer 2</ion-label>
+            <ion-radio value="ans2"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Answer 3</ion-label>
+            <ion-radio value="ans3"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Answer 4</ion-label>
+            <ion-radio value="ans4"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>
+          Uhuuuuhuuu we have one more question!! Right?
+        </ion-card-title>
+        <ion-list radio-group #qs2 ngControl="qs2" no-lines>
+          <ion-item>
+            <ion-label>Answer 1</ion-label>
+            <ion-radio value="ans1"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Answer 2</ion-label>
+            <ion-radio value="ans2"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Answer 3</ion-label>
+            <ion-radio value="ans3"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Answer 4</ion-label>
+            <ion-radio value="ans4"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+  </form>
+
+  <button round block primary (click)="save()">Save answers!</button>
+  <p *ngIf="submittedForm" style="color: green; text-align: center;">You have already submitted the survey once.</p>
 
 </ion-content>
