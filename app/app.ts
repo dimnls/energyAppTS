@@ -10,6 +10,8 @@ import {Page1} from './pages/page1/page1';
 import {DayModel} from './models/day-model';
 
 import {DaysLogsPage} from './pages/days-logs/days-logs';
+import {SurveyPage} from './pages/survey/survey';
+
 import '../node_modules/chart.js/dist/Chart.bundle.min.js'; //NOTE: IMPORTANT TO USE THIS HERE! DO NO REMOVE
 
 @App({
@@ -39,7 +41,8 @@ export class MyApp {
     this.menuPages = [
       {title: 'Edit user info', component: UserInfoPage, icon: 'person'},
       {title: 'Watch intro', component: IntroPage, icon: 'desktop'},
-      {title: 'Energy logs', component: DaysLogsPage, icon: 'clipboard'}
+      {title: 'Energy logs', component: DaysLogsPage, icon: 'clipboard'},
+      {title: 'Survey', component: SurveyPage, icon: 'checkbox-outline' }
     ];
 
 
