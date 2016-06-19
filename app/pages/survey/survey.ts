@@ -103,8 +103,6 @@ export class SurveyPage {
        buttons: ['OK']
      });
      this.nav.present(alert);
-
-
     }, error => {
         console.log("Oooops!");
     });

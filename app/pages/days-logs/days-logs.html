@@ -11,7 +11,7 @@
 
 <ion-content padding class="days-logs">
 
-  <div padding>
+  <div class="segments-bar">
     <ion-segment [(ngModel)]="segments">
       <ion-segment-button value="list">
         Past Days
@@ -31,6 +31,9 @@
           <span class="day-value">{{ day.totalConsumedThisDay }}W</span>
         </ion-item>
       </ion-list>
+      <button round block (click)="uploadDaysLog()">Send logs to server</button>
+      <p *ngIf="submittedLogs" style="color: green; text-align: center;">You last uploaded the logs on: {{ submittedLogsOn }}</p>
+
     </div>
 
     <div *ngSwitchWhen = "'graphs'">

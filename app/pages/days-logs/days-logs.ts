@@ -1,9 +1,10 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Page, NavController, NavParams, Alert, Platform} from 'ionic-angular';
 import {DayModel} from '../../models/day-model';
 import {DataService} from '../../providers/data/data';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
-
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
+import {Http} from '@angular/http';
+import {Device} from 'ionic-native';
 
 
 
@@ -51,8 +52,26 @@ export class DaysLogsPage {
   public lineChartLegend: boolean = true;
   public lineChartType: string = 'bar';
 
-  constructor(public nav: NavController, public dataService: DataService) {
+  dataToSend: any;
+  uuid: string;
+  response: string;
+  submittedLogsOn: string;
+  submittedLogs: boolean = false;
+
+  constructor(public nav: NavController, public dataService: DataService, public http: Http, public platform: Platform) {
     this.days = [];
+    this.http = http;
+    this.dataToSend = {};
+
+    this.platform.ready().then(() => {
+      this.uuid = Device.device.uuid;
+      this.dataService.localGetItem('submittedLogsOn').then((value) => {
+        if(value) {
+          this.submittedLogsOn = value;
+          this.submittedLogs = true;
+        }
+      });
+    });
 
     for( let row = 0; row < this.appliances.length; row++) {
       let rowAppliance = [];
@@ -73,7 +92,6 @@ export class DaysLogsPage {
 
             this.totalAppliancesConsumption[j][1] += (this.loadedDays[i].appliancesConsumption[j][2] * 1); //increase total appliance energy
           }
-
         }
         this.days.reverse();
         this.makeGraph();
@@ -81,10 +99,7 @@ export class DaysLogsPage {
         alert('Empty Log.');
         return;
       }
-
     });
-
-
   }
 
   makeGraph() {
@@ -98,6 +113,57 @@ export class DaysLogsPage {
     this.lineChartLabels = applianceNames;
   }
 
-
+  uploadDaysLog () {
+    var time = new Date();
+    let alert = Alert.create({
+      title: 'Ready to send',
+      subTitle: 'You are about to send your data to the server.',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: alertData => {
+            console.log('Cancel server sending.');
+          }
+        },
+        {
+          text: 'OK',
+          handler: alertData => {
+            var link = 'http://83.212.99.80/Amber/DayLogs/Days_api.php';
+            this.dataToSend.uuid = this.uuid;
+            this.dataToSend.timestamp = time;
+            let dayPairs = [];
+            for(let i = 0; i< this.loadedDays.length; i++) {
+              let pair = {
+                date: this.loadedDays[i].date,
+                consumption: this.loadedDays[i].totalConsumedThisDay
+              };
+              dayPairs.push(pair);
+            }
+            this.dataToSend.dayPairs = dayPairs;
+            var data = JSON.stringify(this.dataToSend);
+            console.log(data);
+            this.http.post(link, data)
+            .subscribe(data => {
+             this.response = data._body; //NOTE: Ignore error message, it is correct and works.
+             console.log(this.response);
+             let alert = Alert.create({
+               title: 'Data sent successfully!',
+               subTitle: 'Thank you for contributing your data!',
+               buttons: ['OK']
+             });
+             this.nav.present(alert);
+             this.submittedLogsOn = time.toString();
+             this.submittedLogs = true;
+             this.dataService.localSetItem('submittedLogsOn', this.submittedLogsOn);
+             this.dataService.localSetItem('submittedLogs', true);
+            }, error => {
+                console.log("Oooops!");
+            });
+          }
+        }
+      ]
+    });
+    this.nav.present(alert);
+  }
 
 }
