@@ -1,4 +1,4 @@
-import {Page, NavController, Platform, Loading, NavParams} from 'ionic-angular';
+import {Page, NavController, Platform, Loading, NavParams, Toast} from 'ionic-angular';
 import {IntroPage} from '../intro/intro';
 import {TabsPage} from '../tabs/tabs';
 import {UserInfoPage} from '../user-info/user-info';
@@ -8,8 +8,10 @@ import {Page3} from '../page3/page3';
 import {DataService} from '../../providers/data/data';
 import {ShowTipPage} from '../show-tip/show-tip';
 import {DaysLogsPage} from '../days-logs/days-logs';
-
 import {DayModel} from '../../models/day-model';
+import {Clipboard} from 'ionic-native';
+// import {Toast} from 'ionic-native';
+
 
 @Page({
   templateUrl: 'build/pages/page1/page1.html',
@@ -92,42 +94,43 @@ export class Page1 {
     this.myDay.refreshStatus();
   }
 
-  socialShare(message: string = 'I am using Amber to keep track of my Energy consumption! Get the app at http://meetamber.online', subject: string = null, file = null, link: string = 'http://meetamber.online') {
+  toast(message: string) {
+    // Toast.show(message, '4000', 'top').subscribe(
+    //   toast => {
+    //     console.log(toast);
+    //   }
+    // );
+
+    let toast = Toast.create({
+    message: message,
+    duration: 4000
+    });
+
+    toast.onDismiss(() => {
+    console.log('Dismissed toast');
+    });
+
+    this.nav.present(toast);
+}
+
+  socialShare(message: string = 'I am using Amber to keep track of my Energy consumption! Get the app now! #MeetAmber', subject: string = null, file = null, link: string = 'http://meetamber.online') {
+    this.toast('For Facebook sharing, use PASTE to share your Amber love!')
     this.platform.ready().then(() => {
+      Clipboard.copy(message); //To be able to post to Facebook from the same button
       if(window.plugins.socialsharing) {
         window.plugins.socialsharing.share(message, subject, file, link);
       }
     });
   }
 
-  // socialShare(myMessage: string = null, mySubject: string = null, myFile = this.currentTip.image, myLink: string = null) {
-  //   var options = {
-  //     message: myMessage,
-  //     subject: mySubject,
-  //     files: [myFile],
-  //     url: myLink
-  //   }
-  //   var onSuccess = function(result) {
-  //     alert("Sharing successful");
-  //   }
-  //   var onError = function(msg) {
-  //     alert("Sharing failed.");
-  //   }
-  //   this.platform.ready().then(() => {
-  //     if(window.plugins.socialsharing) {
-  //       window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError).then(alert("loaded"));
-  //     }
-  //   });
-  // }
-
-  // facebookShare(message: string = null, subject: string = null, file: string = this.currentTip.image, link: string = null) {
-  //   this.platform.ready().then(() => {
-  //     if(window.plugins.socialsharing) {
-  //       window.plugins.socialsharing.shareViaFacebook(message, subject, file, link, function(errormsg) {alert("Error: Facebook not installed")});
-  //     }
-  //   });
-  // }
-
-
+  consumptionShare(message: string = 'Today I have consumed '+ this.myDay.totalConsumedThisDay + 'W. #MeetAmber #EnergyAwareness' , subject: string = null, file = null, link: string = 'http://meetamber.online') {
+    this.toast('For Facebook sharing, use PASTE to share your consumption!')
+    this.platform.ready().then(() => {
+      Clipboard.copy(message); //To be able to post to Facebook from the same button
+      if(window.plugins.socialsharing) {
+        window.plugins.socialsharing.share(message, subject, file, link);
+      }
+    });
+  }
 
 }

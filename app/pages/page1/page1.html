@@ -20,32 +20,13 @@
     </ion-card-content>
     <ion-row>
       <ion-item>
-        <button primary clear item-right (click)="refreshStatus()">
-          <div>REFRESH</div>
-          <ion-icon name="refresh"></ion-icon>
+        <button primary clear item-right (click)="consumptionShare()">
+          <div>SHARE</div>
+          <ion-icon name="share"></ion-icon>
         </button>
       </ion-item>
     </ion-row>
   </ion-card>
-
-
-  <!-- test TODO:remove -->
-  <!-- <ion-card class="status-card">
-    <img class="status-image" src="{{ myDay.currentStatus.image }}"  />
-    <div class="status-text">
-      <h1 class="status-title">{{ myDay.currentStatus.title }}</h1>
-      <p class="status-subtitle">{{ myDay.currentStatus.description }}</p>
-      <h4 class="total-today">Total Consumption Today: {{ myDay.totalConsumedThisDay }}</h4>
-    </div>
-    <ion-row>
-      <ion-item>
-        <button primary clear item-right (click)="refreshStatus()">
-          <div>REFRESH</div>
-          <ion-icon name="refresh"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-row>
-  </ion-card> -->
 
   <ion-row>
     <img class="statusImage" src="{{ myDay.currentStatus.image }}"  />
@@ -64,7 +45,5 @@
   <ion-row>
     <button danger block (click)="socialShare()" class="bottom-button">Spread the word!</button>
   </ion-row>
-
-
 
 </ion-content>
