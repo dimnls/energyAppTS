@@ -31,7 +31,7 @@
           <span class="day-value">{{ day.totalConsumedThisDay }}W</span>
         </ion-item>
       </ion-list>
-      <button round block (click)="uploadDaysLog()">Send logs to server</button>
+      <button round block (click)="uploadDaysLog()"><ion-icon name="cloud-upload"></ion-icon>Send logs to server</button>
       <p *ngIf="submittedLogs" style="color: green; text-align: center;">You last uploaded the logs on: {{ submittedLogsOn }}</p>
 
     </div>
