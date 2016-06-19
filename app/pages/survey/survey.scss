@@ -1,6 +1,40 @@
 .survey {
-  p {
+  //background-color: #69BB7B;
 
+  ion-card-title {
+    font-size: 1.3em;
+  }
+  ion-card {
+    //background-color: #387ef5;
+    ion-card-title {
+      //color: white;
+    }
+
+    ion-item {
+      //background-color: #f53d3d;
+      //color: white;
+      //font-weight: bold;
+    }
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 1.6em;
+    text-decoration: underline;
+    //color: white;
+  }
+
+  h2 {
+    font-size: 1.3em;
+    padding-top: 1.5em;
+    //color: white;
+  }
+
+  p {
+    font-weight: bold;
+    text-align: center;
+    color: #69BB7B;
+    font-size: 1.1em;
   }
 
 }

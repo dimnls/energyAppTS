@@ -23,8 +23,7 @@ export class SurveyPage {
   uuid: string;
 
   theForm: ControlGroup;
-  qs1Changed: boolean = false;
-  qs2Changed: boolean = false;
+
 
   constructor(public platform: Platform, public nav: NavController, public http: Http, private formBuilder: FormBuilder, public dataService: DataService) {
     this.http = http;
@@ -40,9 +39,25 @@ export class SurveyPage {
       });
     });
 
-    this.theForm = formBuilder.group({
+    this.theForm = formBuilder.group({ //TODO: ADD QUESTIONS HERE
         qs1: ['', Validators.required],
-        qs2: ['', Validators.required]
+        qs2: ['', Validators.required],
+        qs3: ['', Validators.required],
+        qs4: ['', Validators.required],
+        qs5: ['', Validators.required],
+        qs6: ['', Validators.required],
+        qs7: ['', Validators.required],
+        qs8: ['', Validators.required],
+        qs9: ['', Validators.required],
+        qs10: ['', Validators.required],
+        qs11: ['', Validators.required],
+        qs12: ['', Validators.required],
+        qs13: ['', Validators.required],
+        qs14: ['', Validators.required],
+        qs15: ['', Validators.required],
+        qs16: ['', Validators.required],
+        qs17: ['', Validators.required],
+        qs18: ['', Validators.required]
     });
 
 

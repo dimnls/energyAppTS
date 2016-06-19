@@ -10,35 +10,7 @@
 </ion-toolbar>
 
 <ion-content  class="page3">
-  <!-- <h1>Consume Energy</h1>
-  <p>
-    The current date is: <b>{{date}}</b>
-  </p>
-
-  <ion-item>
-    <ion-label floating>How much energy will you consume today?</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-
-  <ion-row>
-    <ion-col>
-      <button energy-purple>Save</button>
-    </ion-col>
-  </ion-row>
-
-  <button fab fab-bottom fab-right energy-purple [navPush]="energyItemsPage">
-    <ion-icon name="flash"></ion-icon>
-  </button> -->
-
-  <!-- <h1> Total W today: {{ totalConsumedToday }}</h1>
-  <ion-list>
-    <button ion-item *ngFor="let appliance of appliances" (click)="applianceTapped($event, appliance)">
-      {{ appliance.title }}
-    </button>
-  </ion-list>
-  {{date}}
-  <button full (click)="clearConsumption()">Clear All</button> -->
-  <h1> Total W today: {{ myDay.totalConsumedThisDay }}</h1>
+  <!-- <h1> Total W today: {{ myDay.totalConsumedThisDay }}</h1> -->
   <ion-list class="appliances-list">
       <ion-item *ngFor="let appliance of appliancesToShow">
         <ion-row>
