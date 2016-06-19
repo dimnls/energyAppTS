@@ -1,5 +1,5 @@
-import {Page, NavController, Loading} from 'ionic-angular';
-
+import {Page, NavController, Loading, Toast, Platform} from 'ionic-angular';
+import {Clipboard} from 'ionic-native';
 /*
   Generated class for the ShowTipPage page.
 
@@ -15,7 +15,7 @@ export class ShowTipPage {
   currentTip: any;
 
 
-  constructor(public nav: NavController) {
+  constructor(public nav: NavController, public platform: Platform) {
     this.randomTip();
 
   }
@@ -49,6 +49,35 @@ export class ShowTipPage {
       loading.dismiss();
       this.getNewTip();
     }, 700);
+  }
+
+  socialShare(message: string = this.currentTip.description + ' #MeetAmber #EnergyFacts ', subject: string = this.currentTip.title, file = null, link: string = 'http://meetamber.online') {
+    this.toast('For Facebook sharing, use PASTE to share the tip!')
+    this.platform.ready().then(() => {
+      Clipboard.copy(message); //To be able to post to Facebook from the same button
+      if(window.plugins.socialsharing) {
+        window.plugins.socialsharing.share(message, subject, file, link);
+      }
+    });
+  }
+
+  toast(message: string) {
+    // Toast.show(message, '4000', 'top').subscribe(
+    //   toast => {
+    //     console.log(toast);
+    //   }
+    // );
+
+    let toast = Toast.create({
+    message: message,
+    duration: 4000
+    });
+
+    toast.onDismiss(() => {
+    console.log('Dismissed toast');
+    });
+
+    this.nav.present(toast);
   }
 
 }

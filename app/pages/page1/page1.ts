@@ -111,7 +111,7 @@ export class Page1 {
     });
 
     this.nav.present(toast);
-}
+  }
 
   socialShare(message: string = 'I am using Amber to keep track of my Energy consumption! Get the app now! #MeetAmber', subject: string = null, file = null, link: string = 'http://meetamber.online') {
     this.toast('For Facebook sharing, use PASTE to share your Amber love!')

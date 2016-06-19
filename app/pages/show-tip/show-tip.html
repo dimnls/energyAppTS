@@ -22,21 +22,15 @@
     </ion-card-content>
     <ion-row>
       <ion-item>
-        <button primary clear item-right (click)="readMore()">
-          <div>READ MORE</div>
-          <ion-icon name="add"></ion-icon>
+        <button primary clear item-left (click)="loadingTip()">
+          <div>NEW TIP</div>
+          <ion-icon name="refresh"></ion-icon>
         </button>
       </ion-item>
       <ion-item>
         <button primary clear item-right (click)="socialShare()">
           <div>SHARE</div>
           <ion-icon name="share"></ion-icon>
-        </button>
-      </ion-item>
-      <ion-item>
-        <button primary clear item-right (click)="loadingTip()">
-          <div>NEW TIP</div>
-          <ion-icon name="refresh"></ion-icon>
         </button>
       </ion-item>
     </ion-row>
