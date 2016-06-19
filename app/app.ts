@@ -9,6 +9,8 @@ import {UserInfoPage} from './pages/user-info/user-info'; //REMEMBER to import a
 import {Page1} from './pages/page1/page1';
 import {DayModel} from './models/day-model';
 
+import {DaysLogsPage} from './pages/days-logs/days-logs';
+
 @App({
   // template: '<ion-nav [root]="rootPage"></ion-nav>',
   templateUrl: 'build/app.html', //FOR MENU
@@ -25,18 +27,23 @@ export class MyApp {
   local: LocalStorage;
   //UserInfo vars
   username: string;
+  startingDate: string;
+
+  days: DayModel[];
 
   constructor(private platform: Platform, private menu: MenuController, private dataService: DataService, private myDay: DayModel) {
 
     this.initializeApp();
+  
     this.menuPages = [
       {title: 'Edit user info', component: UserInfoPage, icon: 'person'},
-      {title: 'Watch intro', component: IntroPage, icon: 'desktop'}
+      {title: 'Watch intro', component: IntroPage, icon: 'desktop'},
+      {title: 'Consumption logs', component: DaysLogsPage, icon: 'clipboard'}
     ];
-    this.dataService.localGetItem('name').then((value) => {
-      this.username = value; //for sidemenu profile card
-    });
-    
+
+
+
+
     this.goToIntroOrHome();
 
   }
@@ -52,10 +59,11 @@ export class MyApp {
   //Check if it's first run and show Intro if it is. Other wise, jump into app
   goToIntroOrHome() {
     this.local = new Storage(LocalStorage);
-    this.local.get('introShown').then((result: any) => {
+    this.local.get('introShown').then((result) => {
       if(result) {
         this.rootPage = TabsPage;
       } else {
+        this.startingDate = new Date().toDateString();
         this.local.set('introShown', 'true');
         this.rootPage = IntroPage;
         console.log('introShown='+this.local.get('introShown'));
