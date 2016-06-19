@@ -97,12 +97,14 @@ export class SurveyPage {
      console.log(this.response);
      this.submittedForm = true;
      this.dataService.localSetItem('submittedForm', true);
-     let alert = Alert.create({
-       title: 'Answers sent successfully!',
-       subTitle: 'Thank you for contributing your data!',
-       buttons: ['OK']
-     });
-     this.nav.present(alert);
+     setTimeout(() => {
+       let alert = Alert.create({
+         title: 'Answers sent successfully!',
+         subTitle: 'Thank you for contributing your data!',
+         buttons: ['OK']
+       });
+       this.nav.present(alert);
+     }, 500);
     }, error => {
         console.log("Oooops!");
     });

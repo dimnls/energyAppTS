@@ -146,12 +146,14 @@ export class DaysLogsPage {
             .subscribe(data => {
              this.response = data._body; //NOTE: Ignore error message, it is correct and works.
              console.log(this.response);
-             let alert = Alert.create({
-               title: 'Data sent successfully!',
-               subTitle: 'Thank you for contributing your data!',
-               buttons: ['OK']
-             });
-             this.nav.present(alert);
+             setTimeout(() => {
+               let alert = Alert.create({
+                 title: 'Data sent successfully!',
+                 subTitle: 'Thank you for contributing your data!',
+                 buttons: ['OK']
+               });
+               this.nav.present(alert);
+             }, 500);
              this.submittedLogsOn = time.toString();
              this.submittedLogs = true;
              this.dataService.localSetItem('submittedLogsOn', this.submittedLogsOn);
