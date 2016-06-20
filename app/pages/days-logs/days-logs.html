@@ -9,8 +9,7 @@
   <ion-title>Energy Logs</ion-title>
 </ion-navbar>
 
-<ion-content padding class="days-logs">
-
+<ion-toolbar>
   <div class="segments-bar">
     <ion-segment [(ngModel)]="segments">
       <ion-segment-button value="list">
@@ -21,6 +20,11 @@
       </ion-segment-button>
     </ion-segment>
   </div>
+</ion-toolbar>
+
+<ion-content padding class="days-logs">
+
+
 
   <div [ngSwitch] = "segments">
 
@@ -37,6 +41,7 @@
     </div>
 
     <div *ngSwitchWhen = "'graphs'">
+      <h1>Daily consumption</h1>
       <base-chart class="chart"
                 [datasets]="lineChartData"
                 [labels]="lineChartLabels"
@@ -44,6 +49,16 @@
                 [colors]="lineChartColours"
                 [legend]="lineChartLegend"
                 [chartType]="lineChartType">
+      </base-chart>
+
+      <h1>Appliances consumption</h1>
+      <base-chart class="chart"
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [colors]="barChartColours"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
       </base-chart>
     </div>
 

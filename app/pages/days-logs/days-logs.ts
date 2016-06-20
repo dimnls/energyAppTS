@@ -21,42 +21,73 @@ import {Device} from 'ionic-native';
 export class DaysLogsPage {
   appliances: any = require('../../appliances.json');
   totalAppliancesConsumption = [];
-  totalConsumption: number;
-  totalConsumptionTime: number;
+  totalConsumption = [];
+  totalConsumptionTime = [];
+  totalDates = [];
+  averageForGraph = [];
+  averageConsumption: number = 200;
 
   days: DayModel[];
   loadedDays: DayModel[];
   segments: string = 'list';
 
-  //CHART
-  // public lineChartData: Array<any> = [{data: [100, 200, 180, 150], label: 'Daily consumption'}];
-  // public lineChartLabels: Array<any> = ['Mon', 'Tue', 'Wed', 'Thu'];
+  //BAR CHART
+  public barChartData: Array<any>;
+  public barChartLabels: Array<any>;
+  public barChartOptions: any = {
+    animation: false,
+    responsive: true
+  };
+  public barChartColours:Array<any> = [
+    // { // grey
+    //   backgroundColor: 'rgba(148,159,177,0.2)',
+    //   borderColor: 'rgba(148,159,177,1)',
+    //   pointBackgroundColor: 'rgba(148,159,177,1)',
+    //   pointBorderColor: '#fff',
+    //   pointHoverBackgroundColor: '#fff',
+    //   pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    // }
+  ];
+  public barChartLegend: boolean = true;
+  public barChartType: string = 'bar';
+  //END BAR CHART
 
+  //LINE CHART
   public lineChartData: Array<any>;
   public lineChartLabels: Array<any>;
-
   public lineChartOptions: any = {
     animation: false,
     responsive: true
   };
   public lineChartColours:Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
+    { // primary
+      backgroundColor: 'rgba(56,126,245,0.2)',
       borderColor: 'rgba(148,159,177,1)',
       pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    },
+    { // green for average
+      backgroundColor: 'rgba(50,219,100,0.0)',
+      borderColor: 'rgba(50,219,100,1)',
+      pointBackgroundColor: 'rgba(50,219,100,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
   public lineChartLegend: boolean = true;
-  public lineChartType: string = 'bar';
+  public lineChartType: string = 'line';
+  //END LINE CHART
 
+  // Server-communication related vars
   dataToSend: any;
   uuid: string;
   response: string;
   submittedLogsOn: string;
   submittedLogs: boolean = false;
+
 
   constructor(public nav: NavController, public dataService: DataService, public http: Http, public platform: Platform) {
     this.days = [];
@@ -73,6 +104,7 @@ export class DaysLogsPage {
       });
     });
 
+
     for( let row = 0; row < this.appliances.length; row++) {
       let rowAppliance = [];
       for( let col = 0; col < 2; col++) {
@@ -86,10 +118,12 @@ export class DaysLogsPage {
         this.loadedDays = value;
         for(let i = 0; i < this.loadedDays.length; i++) {
           this.days.push(this.loadedDays[i]);
+          this.totalConsumption[i] = this.loadedDays[i].totalConsumedThisDay; //total consumptions array
+          this.totalDates[i] = this.loadedDays[i].date; //past dates for graph
+          this.averageForGraph[i] = this.averageConsumption;
 
           for(let j = 0; j < this.appliances.length; j++) {
             this.totalAppliancesConsumption[j][0] += (this.loadedDays[i].appliancesConsumption[j][1] * 1); //increase total appliance time
-
             this.totalAppliancesConsumption[j][1] += (this.loadedDays[i].appliancesConsumption[j][2] * 1); //increase total appliance energy
           }
         }
@@ -109,8 +143,12 @@ export class DaysLogsPage {
       applianceEnergyTotals[i] = this.totalAppliancesConsumption[i][1];
       applianceNames[i] = this.appliances[i].title;
     }
-    this.lineChartData = [{data: applianceEnergyTotals, label: 'Appliances consumption'}];
-    this.lineChartLabels = applianceNames;
+    this.barChartData = [{data: applianceEnergyTotals, label: 'Appliances consumption'}];
+    this.barChartLabels = applianceNames;
+
+    this.lineChartData = [{data: this.totalConsumption, label: 'Daily consumption'}, {data: this.averageForGraph, label: 'Average'}];
+    this.lineChartLabels = this.totalDates;
+
   }
 
   uploadDaysLog () {
