@@ -23,6 +23,7 @@ export class Page1 {
   date: string;
 
   days: DayModel[];//
+  username: string = '';
 
   constructor(public nav: NavController, public platform: Platform, public dataService: DataService, public navParams: NavParams, public myDay: DayModel) {
     this.time = new Date();
@@ -31,7 +32,9 @@ export class Page1 {
 
     this.myDay = myDay;
     this.days = [];
-
+    // this.dataService.localGetItem('username').then((value) => {
+    //   this.username = value;
+    // });
 
     //Check if there a stored CURRENT_DAY that matches today's date. If yes, load it.
     this.dataService.localGetItem('CURRENT_DAY').then((value) => {

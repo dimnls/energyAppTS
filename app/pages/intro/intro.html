@@ -3,7 +3,7 @@
         <h1 class="slide-title">Hello there! I'm Amber!</h1>
         <img class="slide-image" src="images/Amber/Amber_0008_happy_teeth.png" />
         <p>
-          I'm here to help you keep track of your electricity consumption!
+          I'm here to help you keep track of your electrical energy consumption!
         </p>
     </ion-slide>
 
@@ -20,7 +20,7 @@
         <img class="slide-image" src="images/Amber/Amber_0015_love_around.png" />
         <p>
           When you are thoughtful and save energy, I'm happy and excited!
-          But when you waste valueable energy, you will make me sad and angry...
+          But when you waste valueable resources, you will make me sad and angry...
         </p>
     </ion-slide>
 
@@ -37,11 +37,12 @@
           <ion-col>
               <h1 class="slide-title">I'm sure we'll have a great time together!</h1>
               <img class="slide-image" src="images/Amber/Amber_0021_wink.png" />
+              <ion-input type="text" placeholder="Please tell me your name." [(ngModel)]="username" class="username-input"></ion-input>
           </ion-col>
       </ion-row>
       <ion-row>
           <ion-col>
-              <button danger (click)="goToHome()">{{buttonMessage}}</button>
+              <button danger (click)="goToHome()">SAVE AND START MEETING AMBER!</button>
           </ion-col>
       </ion-row>
     </ion-slide>

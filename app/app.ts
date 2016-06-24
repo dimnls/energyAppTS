@@ -39,12 +39,18 @@ export class MyApp {
     this.initializeApp();//
 
     this.menuPages = [
-      {title: 'Edit user info', component: UserInfoPage, icon: 'person'},
+      // {title: 'Edit user info', component: UserInfoPage, icon: 'person'},
       {title: 'Watch intro', component: IntroPage, icon: 'desktop'},
       {title: 'Energy logs', component: DaysLogsPage, icon: 'clipboard'},
       {title: 'Survey', component: SurveyPage, icon: 'checkbox-outline' }
     ];
 
+    this.dataService.localGetItem('username').then((value) => {
+      this.username = value;
+    });
+    this.dataService.localGetItem('startingDate').then((value) => {
+      this.username = value;
+    });
 
 
 
@@ -64,12 +70,13 @@ export class MyApp {
   goToIntroOrHome() {
     this.local = new Storage(LocalStorage);
     this.local.get('introShown').then((result) => {
-      if(result) {
+      if(!result) {
         this.rootPage = TabsPage;
       } else {
         this.startingDate = new Date().toDateString();
+        this.dataService.localSetItem('startingDate', this.startingDate);
         this.local.set('introShown', 'true');
-        this.rootPage = IntroPage;
+        this.rootPage = IntroPage, {appPage: this};
         console.log('introShown='+this.local.get('introShown'));
       }
     })
