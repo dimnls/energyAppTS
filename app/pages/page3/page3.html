@@ -16,23 +16,28 @@
         <ion-row>
           <ion-col width-33>
             <ion-row>
-              <h2>{{ appliance.title }}</h2>
+              <h2 class="appliance-title">{{ appliance.title }}</h2>
             </ion-row>
             <ion-row>
               <img class="appliances" src="{{ appliance.image }}" />
             </ion-row>
             <ion-row>
               <p>
-                {{appliance.wattsPerHour}} W/hr
+                {{appliance.watts}}W
+              </p>
+            </ion-row>
+            <ion-row>
+              <p>
+                {{appliance.kWh}}kWh/{{appliance.time}}{{appliance.units}}
               </p>
             </ion-row>
           </ion-col>
           <ion-col width-33>
             <ion-row>
-              <h3>USAGE TIME: {{ myDay.appliancesConsumption[appliance.id][1] }}</h3>
+              <h3 class="kwh">{{ myDay.appliancesConsumption[appliance.id][2] }} kWh</h3>
             </ion-row>
             <ion-row>
-              <h3>USAGE WATTS: {{ myDay.appliancesConsumption[appliance.id][2] }}</h3>
+              <h3 class="usage">Usage: {{ myDay.appliancesConsumption[appliance.id][1] }} {{appliance.units}}</h3>
             </ion-row>
           </ion-col>
           <ion-col width-33>

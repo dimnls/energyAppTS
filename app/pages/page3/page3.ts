@@ -13,11 +13,12 @@ export class Page3 {
   appliances: any = require('../../appliances.json');
   appliancesToShow: any;
   searchQuery: string;
-  
+
   constructor(public nav: NavController, public dataService: DataService, public navParams: NavParams, public myDay: DayModel) {
     this.searchQuery = '';
     this.myDay = myDay;
     this.initializeAppliancesToShow();
+
   }
 
   initializeAppliancesToShow() {
@@ -45,11 +46,16 @@ export class Page3 {
   }
 
   increaseAppliance(event, appliance) {
-    var applianceChange: number = appliance.wattsPerHour * 1;
+    var applianceChange: number = appliance.kWh * 1;
 
-    this.myDay.appliancesConsumption[appliance.id][1] += 1;
+    this.myDay.appliancesConsumption[appliance.id][1] += (appliance.time * 1);
     this.myDay.appliancesConsumption[appliance.id][2] += applianceChange;
+    var round = Math.round(this.myDay.appliancesConsumption[appliance.id][2]*1000)/1000;
+    this.myDay.appliancesConsumption[appliance.id][2] = round;
+
     this.myDay.totalConsumedThisDay += applianceChange;
+    var roundTot = Math.round(this.myDay.totalConsumedThisDay*1000)/1000;
+    this.myDay.totalConsumedThisDay = roundTot;
 
     this.myDay.refreshStatus();
 
@@ -60,12 +66,17 @@ export class Page3 {
   }
 
   decreaseAppliance(event, appliance) {
-    var applianceChange: number = appliance.wattsPerHour * 1;
+    var applianceChange: number = appliance.kWh * 1;
 
     if(this.myDay.appliancesConsumption[appliance.id][1] != 0) {
-      this.myDay.appliancesConsumption[appliance.id][1] -= 1;
+      this.myDay.appliancesConsumption[appliance.id][1] -= (appliance.time * 1);
       this.myDay.appliancesConsumption[appliance.id][2] -= applianceChange;
+      var round = Math.round(this.myDay.appliancesConsumption[appliance.id][2]*1000)/1000;
+      this.myDay.appliancesConsumption[appliance.id][2] = round;
+
       this.myDay.totalConsumedThisDay -= applianceChange;
+      var roundTot = Math.round(this.myDay.totalConsumedThisDay*1000)/1000;
+      this.myDay.totalConsumedThisDay = roundTot;
 
       this.myDay.refreshStatus();
 

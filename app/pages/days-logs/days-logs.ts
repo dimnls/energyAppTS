@@ -25,7 +25,7 @@ export class DaysLogsPage {
   totalConsumptionTime = [];
   totalDates = [];
   averageForGraph = [];
-  averageConsumption: number = 200;
+  averageConsumption: number = 8.76;
 
   days: DayModel[];
   loadedDays: DayModel[];

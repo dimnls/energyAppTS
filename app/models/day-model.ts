@@ -8,7 +8,7 @@ export class DayModel {
   time: Date;
   date: string;
 
-  averageConsumption: number = 200;
+  averageConsumption: number = 8.76;
 
   totalConsumedThisDay: number;
   appliancesConsumption = [];
@@ -33,7 +33,6 @@ export class DayModel {
       this.appliancesConsumption[row] = rowAppliance;
     }
 
-
     console.log('NEW DAY MODEL CREATED');
     console.log(this);
   }
@@ -43,11 +42,11 @@ export class DayModel {
 
     if(consumption == null || consumption == 0) {
       this.statusId = 0;
-    } else if(consumption >= (this.averageConsumption + 50)) {
+    } else if(consumption >= (this.averageConsumption + 3)) {
       this.statusId = 1;
     } else if(consumption > (this.averageConsumption)) {
       this.statusId = 2;
-    } else if(consumption <= (this.averageConsumption - 50)) {
+    } else if(consumption <= (this.averageConsumption - 3)) {
       this.statusId = 4;
     } else if (consumption <= (this.averageConsumption)) {
       this.statusId = 3;

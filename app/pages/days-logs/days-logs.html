@@ -32,7 +32,7 @@
       <ion-list>
         <ion-item *ngFor="let day of days">
           <span class="day-date">{{ day.date }}:</span>
-          <span class="day-value">{{ day.totalConsumedThisDay }}W</span>
+          <span class="day-value">{{ day.totalConsumedThisDay }}kWh</span>
         </ion-item>
       </ion-list>
       <button round block (click)="uploadDaysLog()"><ion-icon name="cloud-upload"></ion-icon>Send logs to server</button>

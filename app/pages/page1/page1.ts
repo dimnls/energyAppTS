@@ -126,7 +126,7 @@ export class Page1 {
     });
   }
 
-  consumptionShare(message: string = 'Today I have consumed '+ this.myDay.totalConsumedThisDay + 'W. #MeetAmber #EnergyAwareness' , subject: string = null, file = null, link: string = 'http://meetamber.online') {
+  consumptionShare(message: string = 'Today I have consumed '+ this.myDay.totalConsumedThisDay + 'kWh. #MeetAmber #EnergyAwareness' , subject: string = null, file = null, link: string = 'http://meetamber.online') {
     this.toast('For Facebook sharing, use PASTE to share your consumption!')
     this.platform.ready().then(() => {
       Clipboard.copy(message); //To be able to post to Facebook from the same button

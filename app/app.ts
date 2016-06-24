@@ -49,7 +49,7 @@ export class MyApp {
       this.username = value;
     });
     this.dataService.localGetItem('startingDate').then((value) => {
-      this.username = value;
+      this.startingDate = value;
     });
 
 
@@ -70,7 +70,7 @@ export class MyApp {
   goToIntroOrHome() {
     this.local = new Storage(LocalStorage);
     this.local.get('introShown').then((result) => {
-      if(!result) {
+      if(result) {
         this.rootPage = TabsPage;
       } else {
         this.startingDate = new Date().toDateString();

@@ -16,91 +16,14 @@
   <!-- FORM HERE -->
   <form [ngFormModel]="theForm">
 
-    <h2>I. Do you think the following are True or False?</h2>
-    <!-- THIS IS ONE QUESTION WITH ITS OPTIONS [ TRUE / FALSE ] -->
-    <ion-card>
-      <ion-card-content>
-        <ion-card-title>
-          1. Το 90% της ενέργειας που χρησιμοποιούν οι λάμπες πυρακτώσεως αποδίδεται ως θερμότητα.
-        </ion-card-title>
-        <ion-list radio-group #qs1 ngControl="qs1" no-lines>
-          <ion-item>
-            <ion-label>Σωστό</ion-label>
-            <ion-radio value="ans1"></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>Λάθος</ion-label>
-            <ion-radio value="ans2"></ion-radio>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- THIS IS ONE QUESTION WITH ITS OPTIONS [ TRUE / FALSE ] -->
-    <ion-card>
-      <ion-card-content>
-        <ion-card-title>
-          2. Ο φούρνος μικροκυμάτων είναι πιο αποδοτικός ενεργειακά σε σχέση με το συμβατικό φούρνο.
-        </ion-card-title>
-        <ion-list radio-group #qs2 ngControl="qs2" no-lines>
-          <ion-item>
-            <ion-label>Σωστό</ion-label>
-            <ion-radio value="ans1"></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>Λάθος</ion-label>
-            <ion-radio value="ans2"></ion-radio>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- THIS IS ONE QUESTION WITH ITS OPTIONS [ TRUE / FALSE ] -->
-    <ion-card>
-      <ion-card-content>
-        <ion-card-title>
-          3. Οι ηλεκτρικές συσκευές δε χρησιμοποιούν ρεύμα όταν βρίσκονται σε κατάσταση αναμονής (standby).
-        </ion-card-title>
-        <ion-list radio-group #qs3 ngControl="qs3" no-lines>
-          <ion-item>
-            <ion-label>Σωστό</ion-label>
-            <ion-radio value="ans1"></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>Λάθος</ion-label>
-            <ion-radio value="ans2"></ion-radio>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- THIS IS ONE QUESTION WITH ITS OPTIONS [ TRUE / FALSE ] -->
-    <ion-card>
-      <ion-card-content>
-        <ion-card-title>
-          4. Είναι καλύτερο να χρησιμοποιείται το στεγνωτήριο με λίγα ρούχα, γιατί απαιτείται λιγότερη ώρα να στεγνώσουν και άρα καταναλώνεται λιγότερη ενέργεια.
-        </ion-card-title>
-        <ion-list radio-group #qs4 ngControl="qs4" no-lines>
-          <ion-item>
-            <ion-label>Σωστό</ion-label>
-            <ion-radio value="ans1"></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>Λάθος</ion-label>
-            <ion-radio value="ans2"></ion-radio>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
-    <h2>II. Please rate below regarding your current state of energy awareness.</h2>
+    <h2>I. Please rate below regarding your current state of energy awareness.</h2>
     <!-- THIS IS ONE QUESTION WITH ITS OPTIONS -->
     <ion-card>
       <ion-card-content>
         <ion-card-title>
-          5. Ποια είναι μέχρι στιγμής η γενικότερη στάση σου όσον αφορά στην εξοικονόμηση ενέργειας;
+          1. Ποια είναι μέχρι στιγμής η γενικότερη στάση σου όσον αφορά στην εξοικονόμηση ενέργειας;
         </ion-card-title>
-        <ion-list radio-group #qs5 ngControl="qs5" no-lines>
+        <ion-list radio-group #qs1 ngControl="qs1" no-lines>
           <ion-item text-wrap>
             <ion-label>Πολύ θετική- Εξοικονομώ ενέργεια και θεωρώ πως μπορώ να κάνω τη διαφορά</ion-label>
             <ion-radio value="ans1"></ion-radio>
@@ -129,9 +52,9 @@
     <ion-card>
       <ion-card-content>
         <ion-card-title>
-          6.	Πόσο συχνά χρησιμοποιείς το φούρνο μικροκυμάτων για να ξεπαγώσεις γρήγορα φαγητό, αντί να το αφήσεις σε θερμοκρασία δωματίου;
+          2.	Πόσο συχνά χρησιμοποιείς το φούρνο μικροκυμάτων για να ξεπαγώσεις γρήγορα φαγητό, αντί να το αφήσεις σε θερμοκρασία δωματίου;
         </ion-card-title>
-        <ion-list radio-group #qs6 ngControl="qs6" no-lines>
+        <ion-list radio-group #qs2 ngControl="qs2" no-lines>
           <ion-item text-wrap>
             <ion-label>Ποτέ</ion-label>
             <ion-radio value="ans1"></ion-radio>
@@ -160,9 +83,9 @@
     <ion-card>
       <ion-card-content>
         <ion-card-title>
-          7. Πόσο συχνά αφήνεις αναμμένα τα φώτα σε χώρο στον οποίο δε βρίσκεσαι;
+          3. Πόσο συχνά αφήνεις αναμμένα τα φώτα σε χώρο στον οποίο δε βρίσκεσαι;
         </ion-card-title>
-        <ion-list radio-group #qs7 ngControl="qs7" no-lines>
+        <ion-list radio-group #qs3 ngControl="qs3" no-lines>
           <ion-item text-wrap>
             <ion-label>Ποτέ</ion-label>
             <ion-radio value="ans1"></ion-radio>
@@ -187,9 +110,9 @@
     <ion-card>
       <ion-card-content>
         <ion-card-title>
-          8. Πόσο συχνά λειτουργείς το πλυντήριο ρούχων/πιάτων χωρίς να είναι πλήρως γεμάτο, χωρίς να επιλέξεις το αντίστοιχο πρόγραμμα;
+          4. Πόσο συχνά λειτουργείς το πλυντήριο ρούχων/πιάτων χωρίς να είναι πλήρως γεμάτο, χωρίς να επιλέξεις το αντίστοιχο πρόγραμμα;
         </ion-card-title>
-        <ion-list radio-group #qs8 ngControl="qs8" no-lines>
+        <ion-list radio-group #qs4 ngControl="qs4" no-lines>
           <ion-item text-wrap>
             <ion-label>Ποτέ</ion-label>
             <ion-radio value="ans1"></ion-radio>
@@ -218,9 +141,9 @@
     <ion-card>
       <ion-card-content>
         <ion-card-title>
-          9.	Πόσο συχνά χρησιμοποιείς το πλυντήριο ρούχων σε υψηλές θερμοκρασίες;
+          5.	Πόσο συχνά χρησιμοποιείς το πλυντήριο ρούχων σε υψηλές θερμοκρασίες;
         </ion-card-title>
-        <ion-list radio-group #qs9 ngControl="qs9" no-lines>
+        <ion-list radio-group #qs5 ngControl="qs5" no-lines>
           <ion-item text-wrap>
             <ion-label>Ποτέ</ion-label>
             <ion-radio value="ans1"></ion-radio>
@@ -249,9 +172,9 @@
     <ion-card>
       <ion-card-content>
         <ion-card-title>
-          10. Πόσο συχνά κρατάς την πόρτα του ψυγείου ανοιχτή για αρκετή ώρα προκειμένου να διαλέξεις κάτι από μέσα/ δεις τι χρειάζεσαι/τακτοποιήσεις τα ψώνια;
+          6. Πόσο συχνά κρατάς την πόρτα του ψυγείου ανοιχτή για αρκετή ώρα προκειμένου να διαλέξεις κάτι από μέσα/ δεις τι χρειάζεσαι/τακτοποιήσεις τα ψώνια;
         </ion-card-title>
-        <ion-list radio-group #qs10 ngControl="qs10" no-lines>
+        <ion-list radio-group #qs6 ngControl="qs6" no-lines>
           <ion-item text-wrap>
             <ion-label>Ποτέ</ion-label>
             <ion-radio value="ans1"></ion-radio>
@@ -280,9 +203,9 @@
     <ion-card>
       <ion-card-content>
         <ion-card-title>
-          11. Πόσο συχνά αφήνεις ανοιχτό το Laptop ή τον Η/Υ χωρίς να τα χρησιμοποιείς;
+          7. Πόσο συχνά αφήνεις ανοιχτό το Laptop ή τον Η/Υ χωρίς να τα χρησιμοποιείς;
         </ion-card-title>
-        <ion-list radio-group #qs11 ngControl="qs11" no-lines>
+        <ion-list radio-group #qs7 ngControl="qs7" no-lines>
           <ion-item text-wrap>
             <ion-label>Ποτέ</ion-label>
             <ion-radio value="ans1"></ion-radio>
@@ -307,12 +230,136 @@
       </ion-card-content>
     </ion-card>
 
-    <h2>III. Please rate how much you agree with the following.</h2>
+    <h2>II. Please rate how much you agree with the following.</h2>
     <!-- THIS IS ONE QUESTION WITH ITS OPTIONS -->
     <ion-card>
       <ion-card-content>
         <ion-card-title>
-          12. Μου είναι δύσκολο να αλλάξω τις συνήθειές μου σε πιο οικολογικές.
+          8. Μου είναι δύσκολο να αλλάξω τις συνήθειές μου σε πιο οικολογικές.
+        </ion-card-title>
+        <ion-list radio-group #qs8 ngControl="qs8" no-lines>
+          <ion-item text-wrap>
+            <ion-label>Καθόλου</ion-label>
+            <ion-radio value="ans1"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Λίγο</ion-label>
+            <ion-radio value="ans2"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Αρκετά</ion-label>
+            <ion-radio value="ans3"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Πολύ</ion-label>
+            <ion-radio value="ans4"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Πάρα πολύ</ion-label>
+            <ion-radio value="ans5"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- THIS IS ONE QUESTION WITH ITS OPTIONS -->
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>
+          9. Αξίζει τον κόπο να συμπεριφέρομαι πιο οικολογικά μόνο αν εξοικονομώ χρήματα.
+        </ion-card-title>
+        <ion-list radio-group #qs9 ngControl="qs9" no-lines>
+          <ion-item text-wrap>
+            <ion-label>Καθόλου</ion-label>
+            <ion-radio value="ans1"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Λίγο</ion-label>
+            <ion-radio value="ans2"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Αρκετά</ion-label>
+            <ion-radio value="ans3"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Πολύ</ion-label>
+            <ion-radio value="ans4"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Πάρα πολύ</ion-label>
+            <ion-radio value="ans5"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- THIS IS ONE QUESTION WITH ITS OPTIONS -->
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>
+          10. Η δική μου μόνο συμπεριφορά δε θα κάνει τη διαφορά. Πρέπει όλοι να κάνουν το ίδιο.
+        </ion-card-title>
+        <ion-list radio-group #qs10 ngControl="qs10" no-lines>
+          <ion-item text-wrap>
+            <ion-label>Καθόλου</ion-label>
+            <ion-radio value="ans1"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Λίγο</ion-label>
+            <ion-radio value="ans2"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Αρκετά</ion-label>
+            <ion-radio value="ans3"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Πολύ</ion-label>
+            <ion-radio value="ans4"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Πάρα πολύ</ion-label>
+            <ion-radio value="ans5"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- THIS IS ONE QUESTION WITH ITS OPTIONS -->
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>
+          11. Δε με απασχολεί ιδιαίτερα η εξοικονόμηση ενέργειας στο σπίτι μου.
+        </ion-card-title>
+        <ion-list radio-group #qs11 ngControl="qs11" no-lines>
+          <ion-item text-wrap>
+            <ion-label>Καθόλου</ion-label>
+            <ion-radio value="ans1"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Λίγο</ion-label>
+            <ion-radio value="ans2"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Αρκετά</ion-label>
+            <ion-radio value="ans3"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Πολύ</ion-label>
+            <ion-radio value="ans4"></ion-radio>
+          </ion-item>
+          <ion-item text-wrap>
+            <ion-label>Πάρα πολύ</ion-label>
+            <ion-radio value="ans5"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- THIS IS ONE QUESTION WITH ITS OPTIONS -->
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>
+          12. Θα χρησιμοποιούσα το λεωφορείο για τις μετακινήσεις μου μόνο αν δεν είχα άλλη επιλογή.
         </ion-card-title>
         <ion-list radio-group #qs12 ngControl="qs12" no-lines>
           <ion-item text-wrap>
@@ -343,7 +390,7 @@
     <ion-card>
       <ion-card-content>
         <ion-card-title>
-          13. Αξίζει τον κόπο να συμπεριφέρομαι πιο οικολογικά μόνο αν εξοικονομώ χρήματα.
+          13. Σκοπεύω να αντικαταστήσω τις υπάρχουσες συσκευές (εφόσον δεν είναι ήδη) με πιο αποδοτικές ενεργειακά.
         </ion-card-title>
         <ion-list radio-group #qs13 ngControl="qs13" no-lines>
           <ion-item text-wrap>
@@ -374,133 +421,9 @@
     <ion-card>
       <ion-card-content>
         <ion-card-title>
-          14. Η δική μου μόνο συμπεριφορά δε θα κάνει τη διαφορά. Πρέπει όλοι να κάνουν το ίδιο.
+          14. Η οικολογική συμπεριφορά είναι εναλλακτικός τρόπος ζωής και δεν αντιπροσωπεύει την πλειοψηφία.
         </ion-card-title>
         <ion-list radio-group #qs14 ngControl="qs14" no-lines>
-          <ion-item text-wrap>
-            <ion-label>Καθόλου</ion-label>
-            <ion-radio value="ans1"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Λίγο</ion-label>
-            <ion-radio value="ans2"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Αρκετά</ion-label>
-            <ion-radio value="ans3"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Πολύ</ion-label>
-            <ion-radio value="ans4"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Πάρα πολύ</ion-label>
-            <ion-radio value="ans5"></ion-radio>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- THIS IS ONE QUESTION WITH ITS OPTIONS -->
-    <ion-card>
-      <ion-card-content>
-        <ion-card-title>
-          15. Δε με απασχολεί ιδιαίτερα η εξοικονόμηση ενέργειας στο σπίτι μου.
-        </ion-card-title>
-        <ion-list radio-group #qs15 ngControl="qs15" no-lines>
-          <ion-item text-wrap>
-            <ion-label>Καθόλου</ion-label>
-            <ion-radio value="ans1"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Λίγο</ion-label>
-            <ion-radio value="ans2"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Αρκετά</ion-label>
-            <ion-radio value="ans3"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Πολύ</ion-label>
-            <ion-radio value="ans4"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Πάρα πολύ</ion-label>
-            <ion-radio value="ans5"></ion-radio>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- THIS IS ONE QUESTION WITH ITS OPTIONS -->
-    <ion-card>
-      <ion-card-content>
-        <ion-card-title>
-          16. Θα χρησιμοποιούσα το λεωφορείο για τις μετακινήσεις μου μόνο αν δεν είχα άλλη επιλογή.
-        </ion-card-title>
-        <ion-list radio-group #qs16 ngControl="qs16" no-lines>
-          <ion-item text-wrap>
-            <ion-label>Καθόλου</ion-label>
-            <ion-radio value="ans1"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Λίγο</ion-label>
-            <ion-radio value="ans2"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Αρκετά</ion-label>
-            <ion-radio value="ans3"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Πολύ</ion-label>
-            <ion-radio value="ans4"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Πάρα πολύ</ion-label>
-            <ion-radio value="ans5"></ion-radio>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- THIS IS ONE QUESTION WITH ITS OPTIONS -->
-    <ion-card>
-      <ion-card-content>
-        <ion-card-title>
-          17. Σκοπεύω να αντικαταστήσω τις υπάρχουσες συσκευές (εφόσον δεν είναι ήδη) με πιο αποδοτικές ενεργειακά.
-        </ion-card-title>
-        <ion-list radio-group #qs17 ngControl="qs17" no-lines>
-          <ion-item text-wrap>
-            <ion-label>Καθόλου</ion-label>
-            <ion-radio value="ans1"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Λίγο</ion-label>
-            <ion-radio value="ans2"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Αρκετά</ion-label>
-            <ion-radio value="ans3"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Πολύ</ion-label>
-            <ion-radio value="ans4"></ion-radio>
-          </ion-item>
-          <ion-item text-wrap>
-            <ion-label>Πάρα πολύ</ion-label>
-            <ion-radio value="ans5"></ion-radio>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- THIS IS ONE QUESTION WITH ITS OPTIONS -->
-    <ion-card>
-      <ion-card-content>
-        <ion-card-title>
-          18. Η οικολογική συμπεριφορά είναι εναλλακτικός τρόπος ζωής και δεν αντιπροσωπεύει την πλειοψηφία.
-        </ion-card-title>
-        <ion-list radio-group #qs18 ngControl="qs18" no-lines>
           <ion-item text-wrap>
             <ion-label>Καθόλου</ion-label>
             <ion-radio value="ans1"></ion-radio>

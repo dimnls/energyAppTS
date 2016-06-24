@@ -53,11 +53,7 @@ export class SurveyPage {
         qs11: ['', Validators.required],
         qs12: ['', Validators.required],
         qs13: ['', Validators.required],
-        qs14: ['', Validators.required],
-        qs15: ['', Validators.required],
-        qs16: ['', Validators.required],
-        qs17: ['', Validators.required],
-        qs18: ['', Validators.required]
+        qs14: ['', Validators.required]
     });
 
 
