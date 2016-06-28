@@ -10,4 +10,5 @@ interface Window {
 	 * @description Stub for the plugins variable.
 	 */
 	plugins: any;
+	cordovaSQLiteDriver: any;
 }
