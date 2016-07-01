@@ -36,7 +36,16 @@ export class DaysLogsPage {
   public barChartLabels: Array<any>;
   public barChartOptions: any = {
     animation: false,
-    responsive: true
+    responsive: true,
+    scales: {
+      xAxes: [{
+        ticks: {
+          autoSkip: false,
+          fontSize: 7,
+          minRotation: 0
+        }
+      }]
+    }
   };
   public barChartColours:Array<any> = [
     // { // grey
@@ -57,7 +66,14 @@ export class DaysLogsPage {
   public lineChartLabels: Array<any>;
   public lineChartOptions: any = {
     animation: false,
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
   };
   public lineChartColours:Array<any> = [
     { // primary
@@ -155,14 +171,14 @@ export class DaysLogsPage {
       applianceEnergyTotals[i] = this.totalAppliancesConsumption[i][1];
       applianceNames[i] = this.appliances[i].title;
     }
-    this.barChartData = [{data: applianceEnergyTotals, label: 'Appliances consumption'}];
+    this.barChartData = [{data: applianceEnergyTotals, label: 'Appliances Consumption'}];
     this.barChartLabels = applianceNames;
     var userAverageArray = [];
     for( let i=0; i<this.days.length; i++ ){
       userAverageArray[i] = this.averageOverall;
     }
 
-    this.lineChartData = [{data: this.totalConsumption, label: 'Daily consumption'}, {data: this.averageForGraph, label: 'Average Greek Household'}, {data: userAverageArray, label: 'Your Average'}];
+    this.lineChartData = [{data: this.totalConsumption, label: 'Daily Consumption'}, {data: this.averageForGraph, label: 'Average Greek Household'}, {data: userAverageArray, label: 'Your Average'}];
     this.lineChartLabels = this.totalDates;
 
   }

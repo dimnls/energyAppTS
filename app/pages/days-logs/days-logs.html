@@ -29,7 +29,7 @@
   <div [ngSwitch] = "segments">
 
     <div *ngSwitchWhen = "'list'">
-      <h1 class='average-consumption'>Your average consumption over {{days.length}} days is: <span class='average-number'>{{averageOverall}}</span></h1>
+      <h1 class='average-consumption'>Your average consumption over {{days.length}} days is: <span class='average-number'>{{averageOverall}}</span>kWh.</h1>
       <ion-list>
         <ion-item *ngFor="let day of days">
           <span class="day-date">{{ day.date }}:</span>
@@ -42,7 +42,8 @@
     </div>
 
     <div *ngSwitchWhen = "'graphs'">
-      <h1>Daily consumption</h1>
+      <!-- <span class='tip'>Use your device in landscape mode for a better graph experience!</span> -->
+      <h1>Daily Consumption</h1>
       <base-chart class="chart"
                 [datasets]="lineChartData"
                 [labels]="lineChartLabels"
@@ -52,7 +53,7 @@
                 [chartType]="lineChartType">
       </base-chart>
 
-      <h1>Appliances consumption</h1>
+      <h1>Appliances Consumption</h1>
       <base-chart class="chart"
                 [datasets]="barChartData"
                 [labels]="barChartLabels"
