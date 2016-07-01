@@ -75,6 +75,14 @@ export class DaysLogsPage {
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    },
+    { // orange for user average
+      backgroundColor: 'rgba(50,219,100,0.0)',
+      borderColor: 'rgba(247,174,0,1)',
+      pointBackgroundColor: 'rgba(247,174,0,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
   public lineChartLegend: boolean = true;
@@ -87,7 +95,8 @@ export class DaysLogsPage {
   response: string;
   submittedLogsOn: string;
   submittedLogs: boolean = false;
-
+  averageOverall: number = 0;
+  totalOverall: number = 0;
 
   constructor(public nav: NavController, public dataService: DataService, public http: Http, public platform: Platform) {
     this.days = [];
@@ -121,12 +130,15 @@ export class DaysLogsPage {
           this.totalConsumption[i] = this.loadedDays[i].totalConsumedThisDay; //total consumptions array
           this.totalDates[i] = this.loadedDays[i].date; //past dates for graph
           this.averageForGraph[i] = this.averageConsumption;
+          this.totalOverall += this.totalConsumption[i];
 
           for(let j = 0; j < this.appliances.length; j++) {
             this.totalAppliancesConsumption[j][0] += (this.loadedDays[i].appliancesConsumption[j][1] * 1); //increase total appliance time
             this.totalAppliancesConsumption[j][1] += (this.loadedDays[i].appliancesConsumption[j][2] * 1); //increase total appliance energy
           }
         }
+        var round = Math.round( (this.totalOverall / this.days.length)*1000 )/1000;
+        this.averageOverall = round;
         this.days.reverse();
         this.makeGraph();
       } else {
@@ -145,8 +157,12 @@ export class DaysLogsPage {
     }
     this.barChartData = [{data: applianceEnergyTotals, label: 'Appliances consumption'}];
     this.barChartLabels = applianceNames;
+    var userAverageArray = [];
+    for( let i=0; i<this.days.length; i++ ){
+      userAverageArray[i] = this.averageOverall;
+    }
 
-    this.lineChartData = [{data: this.totalConsumption, label: 'Daily consumption'}, {data: this.averageForGraph, label: 'Average'}];
+    this.lineChartData = [{data: this.totalConsumption, label: 'Daily consumption'}, {data: this.averageForGraph, label: 'Average Greek Household'}, {data: userAverageArray, label: 'Your Average'}];
     this.lineChartLabels = this.totalDates;
 
   }

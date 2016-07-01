@@ -29,6 +29,7 @@
   <div [ngSwitch] = "segments">
 
     <div *ngSwitchWhen = "'list'">
+      <h1 class='average-consumption'>Your average consumption over {{days.length}} days is: <span class='average-number'>{{averageOverall}}</span></h1>
       <ion-list>
         <ion-item *ngFor="let day of days">
           <span class="day-date">{{ day.date }}:</span>
