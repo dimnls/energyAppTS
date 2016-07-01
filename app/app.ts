@@ -11,6 +11,7 @@ import {DayModel} from './models/day-model';
 
 import {DaysLogsPage} from './pages/days-logs/days-logs';
 import {SurveyPage} from './pages/survey/survey';
+import {AboutPage} from './pages/about/about';
 
 import '../node_modules/chart.js/dist/Chart.bundle.min.js'; //NOTE: IMPORTANT TO USE THIS HERE! DO NO REMOVE
 
@@ -42,7 +43,8 @@ export class MyApp {
       // {title: 'Edit user info', component: UserInfoPage, icon: 'person'},
       {title: 'Watch intro', component: IntroPage, icon: 'desktop'},
       {title: 'Energy logs', component: DaysLogsPage, icon: 'clipboard'},
-      {title: 'Survey', component: SurveyPage, icon: 'checkbox-outline' }
+      {title: 'Survey', component: SurveyPage, icon: 'checkbox-outline' },
+      {title: 'About', component: AboutPage, icon: 'help'}
     ];
 
     this.dataService.localGetItem('username').then((value) => {
